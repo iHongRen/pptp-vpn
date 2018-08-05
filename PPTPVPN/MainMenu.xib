@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="Voe-Tx-rLC" id="GzC-gU-4Uq"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
+            <connections>
+                <outlet property="connectSwitch" destination="gwL-XT-rvz" id="kkH-aD-9cj"/>
+                <outlet property="vpnMenu" destination="WN0-yC-FnI" id="Amk-8F-EoN"/>
+            </connections>
+        </customObject>
+        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <menu id="WN0-yC-FnI">
+            <items>
+                <menuItem title="Item 1" id="ln8-h9-Jj6">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <outlet property="view" destination="RGX-aa-CK2" id="Nzk-4e-TsE"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Server" id="Z4H-P3-ots">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="onConfigServer:" target="Voe-Tx-rLC" id="ki4-Kv-GiN"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Quit" keyEquivalent="q" id="RQ9-lU-VSE">
+                    <connections>
+                        <action selector="onQuit:" target="Voe-Tx-rLC" id="6gO-9W-lPv"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-12" y="87"/>
+        </menu>
+        <customView id="RGX-aa-CK2">
+            <rect key="frame" x="0.0" y="0.0" width="117" height="59"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gwL-XT-rvz" customClass="ITSwitch">
+                    <rect key="frame" x="23" y="11" width="71" height="38"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <connections>
+                        <action selector="onConnectSwitch:" target="Voe-Tx-rLC" id="xAt-v0-KgE"/>
+                    </connections>
+                </customView>
+            </subviews>
+            <point key="canvasLocation" x="33.5" y="276.5"/>
+        </customView>
+    </objects>
+</document>

@@ -8,27 +8,90 @@
 
 /* Begin PBXBuildFile section */
 		742FB4EA21154CEA000FEB1E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB4E921154CEA000FEB1E /* AppDelegate.m */; };
-		742FB4ED21154CEA000FEB1E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB4EC21154CEA000FEB1E /* ViewController.m */; };
 		742FB4EF21154CEB000FEB1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 742FB4EE21154CEB000FEB1E /* Assets.xcassets */; };
-		742FB4F221154CEC000FEB1E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 742FB4F021154CEC000FEB1E /* Main.storyboard */; };
 		742FB4F521154CEC000FEB1E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB4F421154CEC000FEB1E /* main.m */; };
+		742FB50321154D2D000FEB1E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB50221154D2D000FEB1E /* main.m */; };
+		742FB50C211551AA000FEB1E /* SMJobBlessUtil.py in Resources */ = {isa = PBXBuildFile; fileRef = 742FB50B211551AA000FEB1E /* SMJobBlessUtil.py */; };
+		742FB50F21155506000FEB1E /* com.cxy.PPTPVPN.HelpTool in Resources */ = {isa = PBXBuildFile; fileRef = 742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */; };
+		742FB51021155511000FEB1E /* HelpTool-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 742FB50721154DCF000FEB1E /* HelpTool-Info.plist */; };
+		742FB51121155515000FEB1E /* HelpTool-Launchd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 742FB50821154DF5000FEB1E /* HelpTool-Launchd.plist */; };
+		742FB5122115572E000FEB1E /* com.cxy.PPTPVPN.HelpTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		742FB51321155867000FEB1E /* com.cxy.PPTPVPN.HelpTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */; };
+		742FB51E21159765000FEB1E /* ITSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB51D21159764000FEB1E /* ITSwitch.m */; };
+		742FB5442115BB62000FEB1E /* PreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB5422115BB62000FEB1E /* PreferencesWindow.m */; };
+		742FB5452115BB62000FEB1E /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 742FB5432115BB62000FEB1E /* PreferencesWindow.xib */; };
+		742FB5652115EB8D000FEB1E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 742FB5642115EB8D000FEB1E /* MainMenu.xib */; };
+		742FB5682115F15A000FEB1E /* VPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB5672115F15A000FEB1E /* VPNManager.m */; };
+		743622912116B13F00D75E6A /* HelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 743622902116B13F00D75E6A /* HelperTool.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		743622B421175B7B00D75E6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 742FB4DD21154CEA000FEB1E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 742FB4FF21154D2D000FEB1E;
+			remoteInfo = com.cxy.PPTPVPN.HelpTool;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		742FB4FE21154D2D000FEB1E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				742FB51321155867000FEB1E /* com.cxy.PPTPVPN.HelpTool in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		742FB50921154F19000FEB1E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchServices;
+			dstSubfolderSpec = 1;
+			files = (
+				742FB5122115572E000FEB1E /* com.cxy.PPTPVPN.HelpTool in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		742FB4E521154CEA000FEB1E /* PPTPVPN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPTPVPN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		742FB4E821154CEA000FEB1E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		742FB4E921154CEA000FEB1E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		742FB4EB21154CEA000FEB1E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		742FB4EC21154CEA000FEB1E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		742FB4EE21154CEB000FEB1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		742FB4F121154CEC000FEB1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		742FB4F321154CEC000FEB1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		742FB4F421154CEC000FEB1E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		742FB4F621154CEC000FEB1E /* PPTPVPN.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PPTPVPN.entitlements; sourceTree = "<group>"; };
+		742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.cxy.PPTPVPN.HelpTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		742FB50221154D2D000FEB1E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		742FB50721154DCF000FEB1E /* HelpTool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelpTool-Info.plist"; sourceTree = "<group>"; };
+		742FB50821154DF5000FEB1E /* HelpTool-Launchd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelpTool-Launchd.plist"; sourceTree = "<group>"; };
+		742FB50B211551AA000FEB1E /* SMJobBlessUtil.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = SMJobBlessUtil.py; sourceTree = "<group>"; };
+		742FB51C21159764000FEB1E /* ITSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSwitch.h; sourceTree = "<group>"; };
+		742FB51D21159764000FEB1E /* ITSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSwitch.m; sourceTree = "<group>"; };
+		742FB5412115BB62000FEB1E /* PreferencesWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferencesWindow.h; sourceTree = "<group>"; };
+		742FB5422115BB62000FEB1E /* PreferencesWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindow.m; sourceTree = "<group>"; };
+		742FB5432115BB62000FEB1E /* PreferencesWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
+		742FB5642115EB8D000FEB1E /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		742FB5662115F15A000FEB1E /* VPNManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNManager.h; sourceTree = "<group>"; };
+		742FB5672115F15A000FEB1E /* VPNManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNManager.m; sourceTree = "<group>"; };
+		7436228F2116B13F00D75E6A /* HelperTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelperTool.h; sourceTree = "<group>"; };
+		743622902116B13F00D75E6A /* HelperTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelperTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		742FB4E221154CEA000FEB1E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		742FB4FD21154D2D000FEB1E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,7 +104,9 @@
 		742FB4DC21154CEA000FEB1E = {
 			isa = PBXGroup;
 			children = (
+				742FB50B211551AA000FEB1E /* SMJobBlessUtil.py */,
 				742FB4E721154CEA000FEB1E /* PPTPVPN */,
+				742FB50121154D2D000FEB1E /* HelpTool */,
 				742FB4E621154CEA000FEB1E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				742FB4E521154CEA000FEB1E /* PPTPVPN.app */,
+				742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,17 +123,42 @@
 		742FB4E721154CEA000FEB1E /* PPTPVPN */ = {
 			isa = PBXGroup;
 			children = (
+				742FB51B21159764000FEB1E /* ITSwitch */,
 				742FB4E821154CEA000FEB1E /* AppDelegate.h */,
 				742FB4E921154CEA000FEB1E /* AppDelegate.m */,
-				742FB4EB21154CEA000FEB1E /* ViewController.h */,
-				742FB4EC21154CEA000FEB1E /* ViewController.m */,
+				742FB5642115EB8D000FEB1E /* MainMenu.xib */,
+				742FB5412115BB62000FEB1E /* PreferencesWindow.h */,
+				742FB5422115BB62000FEB1E /* PreferencesWindow.m */,
+				742FB5432115BB62000FEB1E /* PreferencesWindow.xib */,
+				742FB5662115F15A000FEB1E /* VPNManager.h */,
+				742FB5672115F15A000FEB1E /* VPNManager.m */,
 				742FB4EE21154CEB000FEB1E /* Assets.xcassets */,
-				742FB4F021154CEC000FEB1E /* Main.storyboard */,
 				742FB4F321154CEC000FEB1E /* Info.plist */,
 				742FB4F421154CEC000FEB1E /* main.m */,
 				742FB4F621154CEC000FEB1E /* PPTPVPN.entitlements */,
 			);
 			path = PPTPVPN;
+			sourceTree = "<group>";
+		};
+		742FB50121154D2D000FEB1E /* HelpTool */ = {
+			isa = PBXGroup;
+			children = (
+				742FB50221154D2D000FEB1E /* main.m */,
+				7436228F2116B13F00D75E6A /* HelperTool.h */,
+				743622902116B13F00D75E6A /* HelperTool.m */,
+				742FB50721154DCF000FEB1E /* HelpTool-Info.plist */,
+				742FB50821154DF5000FEB1E /* HelpTool-Launchd.plist */,
+			);
+			path = HelpTool;
+			sourceTree = "<group>";
+		};
+		742FB51B21159764000FEB1E /* ITSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				742FB51C21159764000FEB1E /* ITSwitch.h */,
+				742FB51D21159764000FEB1E /* ITSwitch.m */,
+			);
+			path = ITSwitch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,15 +171,34 @@
 				742FB4E121154CEA000FEB1E /* Sources */,
 				742FB4E221154CEA000FEB1E /* Frameworks */,
 				742FB4E321154CEA000FEB1E /* Resources */,
+				742FB50921154F19000FEB1E /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				743622B521175B7B00D75E6A /* PBXTargetDependency */,
 			);
 			name = PPTPVPN;
 			productName = PPTPVPN;
 			productReference = 742FB4E521154CEA000FEB1E /* PPTPVPN.app */;
 			productType = "com.apple.product-type.application";
+		};
+		742FB4FF21154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 742FB50421154D2D000FEB1E /* Build configuration list for PBXNativeTarget "com.cxy.PPTPVPN.HelpTool" */;
+			buildPhases = (
+				742FB4FC21154D2D000FEB1E /* Sources */,
+				742FB4FD21154D2D000FEB1E /* Frameworks */,
+				742FB4FE21154D2D000FEB1E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = com.cxy.PPTPVPN.HelpTool;
+			productName = HelpTool;
+			productReference = 742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -100,6 +210,14 @@
 				ORGANIZATIONNAME = "___CXY___";
 				TargetAttributes = {
 					742FB4E421154CEA000FEB1E = {
+						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+					742FB4FF21154D2D000FEB1E = {
 						CreatedOnToolsVersion = 9.4.1;
 					};
 				};
@@ -118,6 +236,7 @@
 			projectRoot = "";
 			targets = (
 				742FB4E421154CEA000FEB1E /* PPTPVPN */,
+				742FB4FF21154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */,
 			);
 		};
 /* End PBXProject section */
@@ -127,8 +246,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				742FB5452115BB62000FEB1E /* PreferencesWindow.xib in Resources */,
+				742FB51121155515000FEB1E /* HelpTool-Launchd.plist in Resources */,
+				742FB51021155511000FEB1E /* HelpTool-Info.plist in Resources */,
+				742FB50F21155506000FEB1E /* com.cxy.PPTPVPN.HelpTool in Resources */,
+				742FB50C211551AA000FEB1E /* SMJobBlessUtil.py in Resources */,
 				742FB4EF21154CEB000FEB1E /* Assets.xcassets in Resources */,
-				742FB4F221154CEC000FEB1E /* Main.storyboard in Resources */,
+				742FB5652115EB8D000FEB1E /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,24 +263,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				742FB4ED21154CEA000FEB1E /* ViewController.m in Sources */,
+				742FB51E21159765000FEB1E /* ITSwitch.m in Sources */,
+				742FB5442115BB62000FEB1E /* PreferencesWindow.m in Sources */,
 				742FB4F521154CEC000FEB1E /* main.m in Sources */,
 				742FB4EA21154CEA000FEB1E /* AppDelegate.m in Sources */,
+				742FB5682115F15A000FEB1E /* VPNManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		742FB4FC21154D2D000FEB1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				742FB50321154D2D000FEB1E /* main.m in Sources */,
+				743622912116B13F00D75E6A /* HelperTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		742FB4F021154CEC000FEB1E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				742FB4F121154CEC000FEB1E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
+/* Begin PBXTargetDependency section */
+		743622B521175B7B00D75E6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 742FB4FF21154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */;
+			targetProxy = 743622B421175B7B00D75E6A /* PBXContainerItemProxy */;
 		};
-/* End PBXVariantGroup section */
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		742FB4F721154CEC000FEB1E /* Debug */ = {
@@ -272,8 +404,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = PPTPVPN/PPTPVPN.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = C98SFK75FC;
 				INFOPLIST_FILE = PPTPVPN/Info.plist;
@@ -283,6 +414,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cxy.PPTPVPN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -290,8 +422,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = PPTPVPN/PPTPVPN.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = C98SFK75FC;
 				INFOPLIST_FILE = PPTPVPN/Info.plist;
@@ -300,6 +431,47 @@
 					"@executable_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cxy.PPTPVPN;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
+		742FB50521154D2D000FEB1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C98SFK75FC;
+				INFOPLIST_FILE = "$(SRCROOT)/HelpTool/HelpTool-Info.plist";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"HelpTool/HelpTool-Info.plist",
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					"HelpTool/HelpTool-Launchd.plist",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		742FB50621154D2D000FEB1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C98SFK75FC;
+				INFOPLIST_FILE = "$(SRCROOT)/HelpTool/HelpTool-Info.plist";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"HelpTool/HelpTool-Info.plist",
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					"HelpTool/HelpTool-Launchd.plist",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -321,6 +493,15 @@
 			buildConfigurations = (
 				742FB4FA21154CEC000FEB1E /* Debug */,
 				742FB4FB21154CEC000FEB1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		742FB50421154D2D000FEB1E /* Build configuration list for PBXNativeTarget "com.cxy.PPTPVPN.HelpTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				742FB50521154D2D000FEB1E /* Debug */,
+				742FB50621154D2D000FEB1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

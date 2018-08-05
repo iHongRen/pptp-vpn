@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ServerWindowController.h
 //  PPTPVPN
 //
 //  Created by chen on 2018/8/4.
@@ -8,8 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
-
+@interface PreferencesWindow : NSWindowController
 
 @end
-
