@@ -19,6 +19,15 @@
 
 #define __SafeBlock(block, ...) (!block?:block(__VA_ARGS__))
 
+#ifndef dispatch_block_main_async_safe
+#define dispatch_block_main_async_safe(block)\
+if ([NSThread isMainThread]) {\
+block();\
+} else {\
+dispatch_async(dispatch_get_main_queue(), block);\
+}
+#endif
+
 @interface VPNManager()
 
 @property (atomic, strong, readwrite) NSXPCConnection *helperToolConnection;
@@ -75,7 +84,7 @@
     
     self.status = VPNStatusConnecting;
     [self executeShellPath:@"/usr/sbin/pppd" arguments:@[@"call",PPTPVPNConfigFileName] block:^(NSError *err) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_block_main_async_safe(^{
             __SafeBlock(block, err);
             self.status = VPNStatusConnected;
         });
@@ -84,7 +93,7 @@
 
 - (void)disConnect:(VPNConnectBlock)block {
     [self executeShellPath:@"/usr/bin/killall" arguments:@[@"pppd"] block:^(NSError *err) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_block_main_async_safe(^{
             __SafeBlock(block, err);
             self.status = VPNStatusDisConnect;
         });

@@ -14,6 +14,8 @@
 #import "VPNManager.h"
 #import "VPNFiler.h"
 
+static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
+
 @interface AppDelegate ()
 @property (weak) IBOutlet NSMenu *vpnMenu;
 @property (nonatomic, strong) NSStatusItem *vpnItem;
@@ -32,6 +34,7 @@
     // Insert code here to initialize your application
     [self helperAuth];
 //    [self setupVPNItem];
+    
 }
 
 
@@ -97,6 +100,13 @@
 }
 
 - (void)helperAuth {
+    
+    if ([self isServiceInstalled:VPNHelperToolLabel]) {
+        [self setupVPNItem];
+        return;
+    }
+
+    
     NSError *error = nil;
     
     OSStatus status = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &self->_authRef);
@@ -106,7 +116,7 @@
         self->_authRef = NULL;
     }
     
-    if (![self blessHelperWithLabel:@"com.cxy.PPTPVPN.HelpTool" error:&error]) {
+    if (![self blessHelperWithLabel:VPNHelperToolLabel error:&error]) {
         NSLog(@"Something went wrong! %@ / %d", [error domain], (int) [error code]);
     } else {
         /* At this point, the job is available. However, this is a very
@@ -156,5 +166,10 @@
     }
     
     return result;
+}
+
+- (BOOL)isServiceInstalled:(NSString *)label {
+    CFDictionaryRef dict = SMJobCopyDictionary(kSMDomainSystemLaunchd, (__bridge CFStringRef)label);
+    return dict != nil;
 }
 @end
