@@ -14,7 +14,7 @@
 	<string>1.0</string>
 	<key>SMAuthorizedClients</key>
 	<array>
-		<string>identifier &quot;com.cxy.PPTPVPN&quot; and anchor apple generic and certificate leaf[subject.CN] = &quot;Mac Developer: chenpolu@foxmail.com (A6N22GWPU9)&quot; and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		<string>identifier "com.cxy.PPTPVPN" and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: chenpolu@foxmail.com (A6N22GWPU9)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</array>
 </dict>
 </plist>

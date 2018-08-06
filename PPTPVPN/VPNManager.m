@@ -15,8 +15,7 @@
 #import <ifaddrs.h>
 #import <arpa/inet.h>
 #import "HelperTool.h"
-
-const NSString *PPTPVPNConfigFileName = @"pptp";// @"this_is_a_pptp_vpn_config_file_0";
+#import "VPNFiler.h"
 
 #define __SafeBlock(block, ...) (!block?:block(__VA_ARGS__))
 
@@ -33,15 +32,9 @@ const NSString *PPTPVPNConfigFileName = @"pptp";// @"this_is_a_pptp_vpn_config_f
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shared = [[self alloc] init];
-        [shared getConfig];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:shared selector:@selector(noti:) name:NSTaskDidTerminateNotification object:nil];
+        [shared getConfig];        
     });
     return shared;
-}
-
-- (void)noti:(NSNotification*)noti {
-    NSLog(@"%@",noti);
 }
 
 - (void)getConfig {
@@ -50,6 +43,8 @@ const NSString *PPTPVPNConfigFileName = @"pptp";// @"this_is_a_pptp_vpn_config_f
     
     NSString *storedPassword = [[NSUserDefaults standardUserDefaults] objectForKey:@"pptp.vpn.password"]?:@"";
     self.password = storedPassword.length ? [storedPassword substringFromIndex:1] : @"";
+    
+    self.status = VPNStatusDisConnect;
 }
 
 - (void)setHost:(NSString *)host {
@@ -68,20 +63,35 @@ const NSString *PPTPVPNConfigFileName = @"pptp";// @"this_is_a_pptp_vpn_config_f
     [[NSUserDefaults standardUserDefaults] setObject:storePassword forKey:@"pptp.vpn.password"];
 }
 
+- (void)setStatus:(VPNStatus)status {
+    _status = status;
+    __SafeBlock(self.connectChangedBlock, status);
+}
+
 - (void)connect:(VPNConnectBlock)block {
-    NSString *cmd = [NSString stringWithFormat:@"sudo pppd call %@",PPTPVPNConfigFileName];
-    [self executeShellCommand:cmd block:block];
+    self.status = VPNStatusConnecting;
+    [self executeShellPath:@"/usr/sbin/pppd" arguments:@[@"call",PPTPVPNConfigFileName] block:^(NSError *err) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            __SafeBlock(block, err);
+            self.status = VPNStatusConnected;
+        });
+    }];
 }
 
 - (void)disConnect:(VPNConnectBlock)block {
-    [self executeShellCommand:@"sudo killall pppd" block:block];
+    [self executeShellPath:@"/usr/bin/killall" arguments:@[@"pppd"] block:^(NSError *err) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            __SafeBlock(block, err);
+            self.status = VPNStatusDisConnect;
+        });
+    }];
 }
 
 - (void)connectChanged:(VPNConnectChangedBlock)block {
     self.connectChangedBlock = block;
 }
 
-- (void)executeShellCommand:(NSString*)cmd block:(VPNConnectBlock)block {
+- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args block:(VPNConnectBlock)block {
     [self connectAndexecuteCommandBlock:^(NSError *err) {
         if (err) {
             [self logError:err];
@@ -92,10 +102,10 @@ const NSString *PPTPVPNConfigFileName = @"pptp";// @"this_is_a_pptp_vpn_config_f
                     [self logError:error];
                     __SafeBlock(block, err);
                 }
-            }] executeShellCommand:cmd withReply:^(NSDictionary *errorInfo) {
+            }] executeShellPath:path arguments:args withReply:^(NSError *errorInfo) {
                 if (errorInfo) {
-                    __SafeBlock(block, [NSError new]);
-                    NSLog(@"execute fail: %@",errorInfo);
+                    __SafeBlock(block, errorInfo);
+                    [self logError:errorInfo];
                 } else {
                     NSLog(@"execute success");
                     __SafeBlock(block, nil);
@@ -131,6 +141,7 @@ const NSString *PPTPVPNConfigFileName = @"pptp";// @"this_is_a_pptp_vpn_config_f
 #pragma clang diagnostic pop
         [self.helperToolConnection resume];
     }
+
 }
 
 - (void)connectAndexecuteCommandBlock:(void(^)(NSError *))commandBlock

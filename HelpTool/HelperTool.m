@@ -22,8 +22,8 @@
 - (id)init {
     if (self = [super init]) {
         // Set up our XPC listener to handle requests on our Mach service.
-        self.listener = [[NSXPCListener alloc] initWithMachServiceName:@"com.cxy.PPTPVPN.HelpTool"];
-        self.listener.delegate = self;
+        self->_listener = [[NSXPCListener alloc] initWithMachServiceName:@"com.cxy.PPTPVPN.HelpTool"];
+        self->_listener.delegate = self;
     }
     return self;
 }
@@ -55,15 +55,31 @@
 
 
 #pragma mark - protocol
-- (void)executeShellCommand:(NSString*)command withReply:(void(^)(NSDictionary * errorInfo))reply {
-    NSString *script = [NSString stringWithFormat:@"do shell script \"%@\"",command];
-    
-    NSAppleScript *appleScript = [[NSAppleScript alloc] initWithSource:script];
-    NSDictionary *dicError = @{};
-    if([appleScript executeAndReturnError:&dicError]) {
-        reply(dicError);
-    } else {
-        reply(dicError);
-    }
+- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args withReply:(void(^)(NSError *error))reply {    
+    NSURL *url = [NSURL fileURLWithPath:path];
+    NSError *err;
+    [NSTask launchedTaskWithExecutableURL:url arguments:args error:&err terminationHandler:nil];
+    reply(err);
 }
+
+- (void)executeShellCommand:(NSString*)command withReply:(void(^)(NSDictionary * errorInfo))reply {
+
+//    int res = system([command UTF8String]);
+    
+
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        reply(@{@"x":@(1)});
+//        NSString *script = [NSString stringWithFormat:@"do shell script \"%@\"",command];
+//        NSAppleScript *appleScript = [[NSAppleScript alloc] initWithSource:script];
+//        NSDictionary *dicError;
+//        if([appleScript executeAndReturnError:&dicError]) {
+//            reply(nil);
+//        } else {
+//            reply(dicError);
+//        }
+//    });
+  
+}
+
+
 @end

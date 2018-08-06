@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/HelpTool-Info.plist</key>
 		<data>
-		KY9nntxPS4+bhp34H5Gag07N/ss=
+		H9BljpmxGY83onuB3w3aGf8wMyc=
 		</data>
 		<key>Resources/HelpTool-Launchd.plist</key>
 		<data>
@@ -14,11 +14,11 @@
 		</data>
 		<key>Resources/MainMenu.nib</key>
 		<data>
-		eOQ0H3XrFJkWZJZ8bOACDebAdMo=
+		ECH+0MB8LPRc5zfQA/DijoGdZWY=
 		</data>
 		<key>Resources/PreferencesWindow.nib</key>
 		<data>
-		7XFNw3iCjk81tBj+eSYnJepU1wo=
+		OMV8vlrx0dhMifAXq3Wrb8mleRE=
 		</data>
 		<key>Resources/SMJobBlessUtil.py</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Resources/com.cxy.PPTPVPN.HelpTool</key>
 		<data>
-		EETmNbCQNGbJakjYft0KswNF2uc=
+		5ODwrxJ8hNlvpAU1skIkpYwZ7H0=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -39,14 +39,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			kTWUtg5p9l7epTISswrc6mNdM+DN74Z+q2Mh7T4LoaE=
+			rSj+jaTHSD2SH/rSlJdv21likqEYxV8ohwpKJN4hkos=
 			</data>
 		</dict>
 		<key>Resources/HelpTool-Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			i33mDHq1S09KzEp2gI9iC7lfL3/YVSbExDKtuCIV/6o=
+			ALsc9lMsceP55O3Xq4vdnu7wwSE2Nkpe3BYIxSwVsbo=
 			</data>
 		</dict>
 		<key>Resources/HelpTool-Launchd.plist</key>
@@ -60,14 +60,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			a4K9byleeRLIdb2axo7XHXqJ9Az0d/rnMbNyRiU7Exg=
+			UKAAE4vToHsNerwrSy3zt8HpXnwcLYLo80FZhkHSR6g=
 			</data>
 		</dict>
 		<key>Resources/PreferencesWindow.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3Zy3fNrMcU4APz3pcqonIFsdDWHPcVjFL50ykZ3HdA8=
+			imkXRJQc8rYee01XAd1Clo7ac2lJzurx3ZCaK/+kVds=
 			</data>
 		</dict>
 		<key>Resources/SMJobBlessUtil.py</key>
@@ -88,7 +88,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0v0pbzQOX4x2VHG95zCF7VE48JbCHl4VXoWN6NjkDsQ=
+			FulhOeB+dLZT5zaeOlxPxAY1MGTZaRmfWMHiSTT1Tuw=
 			</data>
 		</dict>
 	</dict>

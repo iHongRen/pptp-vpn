@@ -8,6 +8,7 @@
 
 #import "PreferencesWindow.h"
 #import "VPNManager.h"
+#import "VPNFiler.h"
 
 @interface PreferencesWindow ()
 
@@ -36,14 +37,22 @@
     shared.host = self.host.stringValue;
     shared.username = self.username.stringValue;
     shared.password = self.password.stringValue;
-    [shared connect:^(NSError *err) {
-        if (err) {
+    
+    [VPNFiler writeVPNFileHost:shared.host user:shared.username password:shared.password block:^(NSError *error) {      
+        if (error) {
             self.errorTip.hidden = NO;
-            self.errorTip.stringValue = err.localizedDescription;
+            self.errorTip.stringValue = error.localizedDescription;
         } else {
-            self.errorTip.hidden = YES;
-            self.errorTip.stringValue = @"";
-            [self.window performClose:self];
+            [shared connect:^(NSError *err) {
+                if (err) {
+                    self.errorTip.hidden = NO;
+                    self.errorTip.stringValue = err.localizedDescription;
+                } else {
+                    self.errorTip.hidden = YES;
+                    self.errorTip.stringValue = @"";
+                    [self.window performClose:self];
+                }
+            }];
         }
     }];
 }

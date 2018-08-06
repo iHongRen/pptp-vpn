@@ -27,8 +27,7 @@
                         <outlet property="view" destination="RGX-aa-CK2" id="Nzk-4e-TsE"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Server" id="Z4H-P3-ots">
-                    <modifierMask key="keyEquivalentModifierMask"/>
+                <menuItem title="Setting" keyEquivalent="," id="Z4H-P3-ots">
                     <connections>
                         <action selector="onConfigServer:" target="Voe-Tx-rLC" id="ki4-Kv-GiN"/>
                     </connections>

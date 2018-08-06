@@ -23,6 +23,7 @@
 		742FB5652115EB8D000FEB1E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 742FB5642115EB8D000FEB1E /* MainMenu.xib */; };
 		742FB5682115F15A000FEB1E /* VPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB5672115F15A000FEB1E /* VPNManager.m */; };
 		743622912116B13F00D75E6A /* HelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 743622902116B13F00D75E6A /* HelperTool.m */; };
+		746AB8482117DE6A0081442B /* VPNFiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 746AB8472117DE6A0081442B /* VPNFiler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		742FB5672115F15A000FEB1E /* VPNManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNManager.m; sourceTree = "<group>"; };
 		7436228F2116B13F00D75E6A /* HelperTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelperTool.h; sourceTree = "<group>"; };
 		743622902116B13F00D75E6A /* HelperTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelperTool.m; sourceTree = "<group>"; };
+		746AB8462117DE6A0081442B /* VPNFiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNFiler.h; sourceTree = "<group>"; };
+		746AB8472117DE6A0081442B /* VPNFiler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNFiler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 				742FB5432115BB62000FEB1E /* PreferencesWindow.xib */,
 				742FB5662115F15A000FEB1E /* VPNManager.h */,
 				742FB5672115F15A000FEB1E /* VPNManager.m */,
+				746AB8462117DE6A0081442B /* VPNFiler.h */,
+				746AB8472117DE6A0081442B /* VPNFiler.m */,
 				742FB4EE21154CEB000FEB1E /* Assets.xcassets */,
 				742FB4F321154CEC000FEB1E /* Info.plist */,
 				742FB4F421154CEC000FEB1E /* main.m */,
@@ -266,6 +271,7 @@
 				742FB51E21159765000FEB1E /* ITSwitch.m in Sources */,
 				742FB5442115BB62000FEB1E /* PreferencesWindow.m in Sources */,
 				742FB4F521154CEC000FEB1E /* main.m in Sources */,
+				746AB8482117DE6A0081442B /* VPNFiler.m in Sources */,
 				742FB4EA21154CEA000FEB1E /* AppDelegate.m in Sources */,
 				742FB5682115F15A000FEB1E /* VPNManager.m in Sources */,
 			);

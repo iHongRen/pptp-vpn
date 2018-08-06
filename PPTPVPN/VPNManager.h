@@ -14,7 +14,6 @@ typedef NS_ENUM(NSInteger, VPNStatus) {
     VPNStatusConnected
 };
 
-extern const NSString *PPTPVPNConfigFileName;
 
 typedef void (^VPNConnectBlock)(NSError* err);
 typedef void (^VPNConnectChangedBlock)(VPNStatus status);

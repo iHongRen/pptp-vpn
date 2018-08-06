@@ -12,6 +12,7 @@
 #import "ITSwitch.h"
 #import "PreferencesWindow.h"
 #import "VPNManager.h"
+#import "VPNFiler.h"
 
 @interface AppDelegate ()
 @property (weak) IBOutlet NSMenu *vpnMenu;
@@ -29,10 +30,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
-//    [self helperAuth];
-    [self setupVPNItem];
-
-
+    [self helperAuth];
+//    [self setupVPNItem];
 }
 
 
@@ -46,13 +45,37 @@
     self.vpnItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     self.vpnItem.title = @"vpn";
     self.vpnItem.menu = self.vpnMenu;
+    
+    [[VPNManager shared] connectChanged:^(VPNStatus status) {
+        switch (status) {
+            case VPNStatusDisConnect:
+                self.vpnItem.title = @"disVpn";
+                self.connectSwitch.checked = NO;
+                break;
+            case VPNStatusConnecting:
+                self.vpnItem.title = @"Vpning";
+                self.connectSwitch.checked = NO;
+                break;
+            case VPNStatusConnected:
+                self.vpnItem.title = @"Vpn";
+                self.connectSwitch.checked = YES;
+                break;
+            default:
+                break;
+        }
+    }];
 }
 
 - (IBAction)onConnectSwitch:(id)sender {
-    
-    
-    [[VPNManager shared] connect:nil];
-
+    if ([VPNManager shared].status == VPNStatusDisConnect) {
+        [[VPNManager shared] connect:^(NSError *err) {
+            
+        }];
+    } else {
+        [[VPNManager shared] disConnect:^(NSError *err) {
+            
+        }];
+    }
 }
 
 - (IBAction)onConfigServer:(id)sender {
@@ -61,12 +84,10 @@
 }
 
 - (IBAction)onQuit:(id)sender {
-    [[VPNManager shared] disConnect:nil];
-    [NSApp terminate:nil];
+    [[VPNManager shared] disConnect:^(NSError *err) {
+//        [NSApp terminate:nil];
+    }];
 }
-
-
-
 
 - (void)helperAuth {
     NSError *error = nil;
