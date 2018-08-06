@@ -55,11 +55,66 @@
 
 
 #pragma mark - protocol
-- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args withReply:(void(^)(NSError *error))reply {    
-    NSURL *url = [NSURL fileURLWithPath:path];
-    NSError *err;
-    [NSTask launchedTaskWithExecutableURL:url arguments:args error:&err terminationHandler:nil];
-    reply(err);
+- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args withReply:(void(^)(NSError *error, NSString *outputString, BOOL success))reply {
+//    NSURL *url = [NSURL fileURLWithPath:path];
+//    NSError *err;
+//    [NSTask launchedTaskWithExecutableURL:url arguments:args error:&err terminationHandler:nil];
+//    reply(err);
+    
+    
+//    NSTask *task = [NSTask new];
+//
+//    [task setLaunchPath:path];
+////    [task setCurrentDirectoryPath:pppdFolder];
+//    [task setArguments:args];
+//
+//    NSPipe *pipe = [NSPipe pipe];
+//    [task setStandardOutput:pipe];
+//    //    [task setStandardError:pipe];
+//    [task setStandardInput:[NSPipe pipe]];
+//
+//    NSMutableString *output = [NSMutableString string];
+//    [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle * _Nonnull file) {
+//        NSData *data = [file availableData];
+//        NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        [output appendString:str];
+//
+//        reply(nil,str, 0);
+//
+//    }];
+//
+//    [task launch];
+//    return;
+//    bool connected = false;
+//    while (!connected) {
+//        reply(nil,output, connected);
+//
+//        if ([output containsString:@"pptp_wait_input: Address added"]) {
+//            connected = true;
+//        }
+//
+//        if (![task isRunning]) {
+//            connected = false;
+//            break;
+//        }
+//
+//        usleep(500);
+//    }
+//
+//    reply(nil,output, connected);
+    
+    NSPipe* pipe = [NSPipe pipe];
+    
+    NSTask* task = [[NSTask alloc] init];
+    [task setLaunchPath: path];
+    [task setArguments:args];
+    [task setStandardOutput:pipe];
+    
+    NSFileHandle* file = [pipe fileHandleForReading];
+    [task launch];
+    
+    NSString *s = [[NSString alloc] initWithData:[file readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+    reply(nil, s, 0);
 }
 
 - (void)executeShellCommand:(NSString*)command withReply:(void(^)(NSDictionary * errorInfo))reply {

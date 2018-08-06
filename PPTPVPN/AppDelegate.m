@@ -43,21 +43,21 @@
 
 - (void)setupVPNItem {
     self.vpnItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    self.vpnItem.title = @"vpn";
+    self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
     self.vpnItem.menu = self.vpnMenu;
     
     [[VPNManager shared] connectChanged:^(VPNStatus status) {
         switch (status) {
             case VPNStatusDisConnect:
-                self.vpnItem.title = @"disVpn";
+                self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
                 self.connectSwitch.checked = NO;
                 break;
             case VPNStatusConnecting:
-                self.vpnItem.title = @"Vpning";
+                self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
                 self.connectSwitch.checked = NO;
                 break;
             case VPNStatusConnected:
-                self.vpnItem.title = @"Vpn";
+                self.vpnItem.image = [NSImage imageNamed:@"vpn_connect"];
                 self.connectSwitch.checked = YES;
                 break;
             default:
@@ -66,7 +66,12 @@
     }];
 }
 
-- (IBAction)onConnectSwitch:(id)sender {
+- (IBAction)onConnectSwitch:(ITSwitch*)sender {
+    if ([VPNManager shared].host.length == 0) {
+        sender.checked = NO;
+        return;
+    }
+    
     if ([VPNManager shared].status == VPNStatusDisConnect) {
         [[VPNManager shared] connect:^(NSError *err) {
             
@@ -79,13 +84,15 @@
 }
 
 - (IBAction)onConfigServer:(id)sender {
-    self.preferencesWindow = [[PreferencesWindow alloc] initWithWindowNibName:@"PreferencesWindow"];
+    if (!self.preferencesWindow) {
+        self.preferencesWindow = [[PreferencesWindow alloc] initWithWindowNibName:@"PreferencesWindow"];
+    }
     [self.preferencesWindow showWindow:self];
 }
 
 - (IBAction)onQuit:(id)sender {
     [[VPNManager shared] disConnect:^(NSError *err) {
-//        [NSApp terminate:nil];
+        [NSApp terminate:nil];
     }];
 }
 

@@ -73,8 +73,10 @@ NSString *const PPTPVPNLogFileDirectory = @"/tmp/pptp_vpn";
     
     NSError *err;
     NSString *script = [vpnConfig stringByAppendingString:[self VPNFileOtherScript]];
-    [script writeToFile:[self VPNFilePath] atomically:YES encoding:NSUTF8StringEncoding error:&err];    
-    !complete?:complete(err);
+    [script writeToFile:[self VPNFilePath] atomically:YES encoding:NSUTF8StringEncoding error:&err];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        !complete?:complete(err);
+    });
 }
 
 

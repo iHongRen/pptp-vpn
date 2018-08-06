@@ -69,13 +69,17 @@
 }
 
 - (void)connect:(VPNConnectBlock)block {
+    if (self.status == VPNStatusConnected) {
+        [self disConnect:nil];
+    }
+    
     self.status = VPNStatusConnecting;
     [self executeShellPath:@"/usr/sbin/pppd" arguments:@[@"call",PPTPVPNConfigFileName] block:^(NSError *err) {
         dispatch_async(dispatch_get_main_queue(), ^{
             __SafeBlock(block, err);
             self.status = VPNStatusConnected;
         });
-    }];
+    }];    
 }
 
 - (void)disConnect:(VPNConnectBlock)block {
@@ -102,13 +106,17 @@
                     [self logError:error];
                     __SafeBlock(block, err);
                 }
-            }] executeShellPath:path arguments:args withReply:^(NSError *errorInfo) {
-                if (errorInfo) {
-                    __SafeBlock(block, errorInfo);
-                    [self logError:errorInfo];
+            }] executeShellPath:path arguments:args withReply:^(NSError *errorInfo,NSString *outputString, BOOL success) {
+                NSLog(@"output: %@, %@",outputString, @(success));
+
+                if (!success) {
+//                    NSLog(@"execute fail");
+
+//                    __SafeBlock(block, errorInfo);
+//                    [self logError:errorInfo];
                 } else {
-                    NSLog(@"execute success");
-                    __SafeBlock(block, nil);
+//                    NSLog(@"execute success");
+//                    __SafeBlock(block, nil);
                 }
             }];
         }

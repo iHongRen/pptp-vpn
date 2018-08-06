@@ -4,6 +4,14 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Resources/AppIcon.icns</key>
+		<data>
+		lLNwLkF3VgGW/+0YKFZEhs1SZ48=
+		</data>
+		<key>Resources/Assets.car</key>
+		<data>
+		b3XulIXKLJxZtj78Y1xt7JuKp9c=
+		</data>
 		<key>Resources/HelpTool-Info.plist</key>
 		<data>
 		H9BljpmxGY83onuB3w3aGf8wMyc=
@@ -30,7 +38,7 @@
 		</data>
 		<key>Resources/com.cxy.PPTPVPN.HelpTool</key>
 		<data>
-		5ODwrxJ8hNlvpAU1skIkpYwZ7H0=
+		yu8hRfVKq4T5dafhwKfpHgConlM=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -39,7 +47,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rSj+jaTHSD2SH/rSlJdv21likqEYxV8ohwpKJN4hkos=
+			caPCl/Xpfc8fNc+Ua36xFiPh150py4tNhlJAHtigKgw=
+			</data>
+		</dict>
+		<key>Resources/AppIcon.icns</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			mwJcYw8Tp47lVQM9jXAN8MSmA87ouW0fG69pFoFSsKg=
+			</data>
+		</dict>
+		<key>Resources/Assets.car</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Wl6QqcDVWX6R/OFmpI7YOzuI5xSKspGTDBU3dK8qCws=
 			</data>
 		</dict>
 		<key>Resources/HelpTool-Info.plist</key>
@@ -88,7 +110,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FulhOeB+dLZT5zaeOlxPxAY1MGTZaRmfWMHiSTT1Tuw=
+			3imvLAWiBaw1us7V8GmrtQhHp7sj0dUouT9YWmWQP/I=
 			</data>
 		</dict>
 	</dict>
