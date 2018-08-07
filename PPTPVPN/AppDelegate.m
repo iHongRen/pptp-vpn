@@ -4,7 +4,7 @@
 //
 //  Created by chen on 2018/8/4.
 //  Copyright © 2018年 ___CXY___. All rights reserved.
-//
+//  https://github.com/iHongRen/pptp-vpn
 
 #import "AppDelegate.h"
 #import <ServiceManagement/ServiceManagement.h>
@@ -97,6 +97,15 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
     [[VPNManager shared] disConnect:^(NSError *err) {
         [NSApp terminate:nil];
     }];
+}
+
+- (IBAction)openLog:(id)sender {
+    [[VPNManager shared] openLog];
+}
+
+- (IBAction)onIssues:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"https://github.com/iHongRen/pptp-vpn"];
+    [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 - (void)helperAuth {

@@ -32,5 +32,5 @@ typedef void (^VPNConnectChangedBlock)(VPNStatus status);
 - (void)disConnect:(VPNConnectBlock)block;
 
 - (void)connectChanged:(VPNConnectChangedBlock)block;
-
+- (void)openLog;
 @end

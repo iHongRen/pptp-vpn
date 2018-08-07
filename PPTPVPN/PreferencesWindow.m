@@ -4,7 +4,7 @@
 //
 //  Created by chen on 2018/8/4.
 //  Copyright © 2018年 ___CXY___. All rights reserved.
-//
+//  https://github.com/iHongRen/pptp-vpn
 
 #import "PreferencesWindow.h"
 #import "VPNManager.h"
@@ -61,5 +61,7 @@
 - (IBAction)cancelClick:(id)sender {
     [self.window performClose:self];
 }
+
+
 
 @end

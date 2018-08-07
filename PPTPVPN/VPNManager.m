@@ -4,7 +4,7 @@
 //
 //  Created by chen on 2018/8/4.
 //  Copyright © 2018年 ___CXY___. All rights reserved.
-//
+//  https://github.com/iHongRen/pptp-vpn
 
 #import "VPNManager.h"
 
@@ -104,6 +104,12 @@ dispatch_async(dispatch_get_main_queue(), block);\
     self.connectChangedBlock = block;
 }
 
+- (void)openLog {
+    [self executeShellPath:@"/usr/bin/open" arguments:@[PPTPVPNLogFileDirectory] block:^(NSError *err) {
+       
+    }];
+}
+
 - (void)executeShellPath:(NSString*)path arguments:(NSArray*)args block:(VPNConnectBlock)block {
     [self connectAndexecuteCommandBlock:^(NSError *err) {
         if (err) {
@@ -117,15 +123,14 @@ dispatch_async(dispatch_get_main_queue(), block);\
                 }
             }] executeShellPath:path arguments:args withReply:^(NSError *errorInfo,NSString *outputString, BOOL success) {
                 NSLog(@"output: %@, %@",outputString, @(success));
-
                 if (!success) {
-//                    NSLog(@"execute fail");
+                    NSLog(@"execute fail");
 
-//                    __SafeBlock(block, errorInfo);
-//                    [self logError:errorInfo];
+                    __SafeBlock(block, errorInfo);
+                    [self logError:errorInfo];
                 } else {
-//                    NSLog(@"execute success");
-//                    __SafeBlock(block, nil);
+                    NSLog(@"execute success");
+                    __SafeBlock(block, nil);
                 }
             }];
         }

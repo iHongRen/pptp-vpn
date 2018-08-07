@@ -4,15 +4,13 @@
 //
 //  Created by chen on 2018/8/6.
 //  Copyright © 2018年 ___CXY___. All rights reserved.
-//
+//  https://github.com/iHongRen/pptp-vpn
 
 #import "VPNFiler.h"
 
 NSString *const PPTPVPNFileDirectory = @"/etc/ppp/peers";
 NSString *const PPTPVPNConfigFileName = @"this_is_a_pptp_vpn_config_file_0";
-NSString *const PPTPVPNLogFileDirectory = @"/tmp/pptp_vpn";
-
-//@"pptp";
+NSString *const PPTPVPNLogFileDirectory = @"/tmp/pptp_vpn_log";
 
 @implementation VPNFiler
 
