@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, VPNStatus) {
 };
 
 
-typedef void (^VPNConnectBlock)(NSError* err);
+typedef void (^VPNConnectBlock)(NSError *err);
 typedef void (^VPNConnectChangedBlock)(VPNStatus status);
 
 @interface VPNManager : NSObject

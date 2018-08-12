@@ -14,7 +14,7 @@ extern NSString *const PPTPVPNLogFileDirectory;
 
 /**
  --- config ---
- remoteaddress \"vpn.xxx.com\"\n\
+ remoteaddress \"vpn.ihongren.com\"\n\
  user \"ihongren\"\n\
  password \"12345678\"\n\
  */

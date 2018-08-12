@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 @protocol HelperToolProtocol
-- (void)executeShellCommand:(NSString*)command withReply:(void(^)(NSDictionary * errorInfo))reply;
-- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args withReply:(void(^)(NSError *error,NSString *outputString, BOOL success))reply;
+- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args withReply:(void(^)(NSError *error,NSString *outputString))reply;
 @end
 
 @interface HelperTool : NSObject
 - (void)run;
-
 @end

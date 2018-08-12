@@ -28,7 +28,7 @@
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="din-eR-QaL">
                         <rect key="frame" x="113" y="178" width="162" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="wx.myvpn.com" drawsBackground="YES" id="BZ6-ZQ-RN4">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="vpn.ihongren.com" drawsBackground="YES" id="BZ6-ZQ-RN4">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -37,7 +37,7 @@
                     <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f4p-wr-dgy">
                         <rect key="frame" x="113" y="89" width="162" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="123456" drawsBackground="YES" usesSingleLineMode="YES" id="GoG-GJ-2du">
+                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="12345678" drawsBackground="YES" usesSingleLineMode="YES" id="GoG-GJ-2du">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -83,7 +83,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vgp-ct-RJj">
-                        <rect key="frame" x="178" y="24" width="92" height="32"/>
+                        <rect key="frame" x="189" y="24" width="92" height="32"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="EH6-YY-6pP"/>
                         </constraints>
@@ -99,7 +99,7 @@ DQ
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="viC-VX-bfP">
-                        <rect key="frame" x="26" y="24" width="92" height="32"/>
+                        <rect key="frame" x="14" y="24" width="92" height="32"/>
                         <buttonCell key="cell" type="push" title="取消" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="blj-Hs-Q13">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -108,7 +108,7 @@ Gw
 </string>
                         </buttonCell>
                         <connections>
-                            <action selector="cancelClick:" target="-2" id="c25-qd-mFG"/>
+                            <action selector="performClose:" target="-1" id="uxb-6j-cQH"/>
                         </connections>
                     </button>
                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="THs-S4-SfF">
@@ -126,10 +126,10 @@ Gw
                 <constraints>
                     <constraint firstItem="viC-VX-bfP" firstAttribute="bottom" secondItem="vgp-ct-RJj" secondAttribute="bottom" id="4kd-PQ-VWl"/>
                     <constraint firstItem="vgp-ct-RJj" firstAttribute="width" secondItem="viC-VX-bfP" secondAttribute="width" id="Ryf-8k-YEX"/>
-                    <constraint firstAttribute="trailing" secondItem="vgp-ct-RJj" secondAttribute="trailing" constant="31" id="SBo-7R-YqS"/>
+                    <constraint firstAttribute="trailing" secondItem="vgp-ct-RJj" secondAttribute="trailing" constant="20" id="SBo-7R-YqS"/>
                     <constraint firstAttribute="bottom" secondItem="THs-S4-SfF" secondAttribute="bottom" constant="2" id="aPz-uE-SRr"/>
                     <constraint firstAttribute="bottom" secondItem="vgp-ct-RJj" secondAttribute="bottom" constant="31" id="bZk-Zt-ERE"/>
-                    <constraint firstItem="viC-VX-bfP" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="32" id="lO4-Fo-E7f"/>
+                    <constraint firstItem="viC-VX-bfP" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="lO4-Fo-E7f"/>
                     <constraint firstAttribute="trailing" secondItem="THs-S4-SfF" secondAttribute="trailing" constant="9" id="qA4-GQ-hyw"/>
                     <constraint firstItem="THs-S4-SfF" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="8" id="uwN-ta-6yL"/>
                 </constraints>
@@ -137,7 +137,7 @@ Gw
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="-645" y="98"/>
+            <point key="canvasLocation" x="-764" y="85"/>
         </window>
     </objects>
 </document>

@@ -15,6 +15,7 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
                 <outlet property="connectSwitch" destination="gwL-XT-rvz" id="kkH-aD-9cj"/>
+                <outlet property="progressIndicator" destination="dfd-fX-MpQ" id="IUI-Kr-2Jj"/>
                 <outlet property="vpnMenu" destination="WN0-yC-FnI" id="Amk-8F-EoN"/>
             </connections>
         </customObject>
@@ -46,11 +47,11 @@
                 </menuItem>
                 <menuItem title="Quit" keyEquivalent="q" id="RQ9-lU-VSE">
                     <connections>
-                        <action selector="onQuit:" target="Voe-Tx-rLC" id="6gO-9W-lPv"/>
+                        <action selector="terminate:" target="-1" id="VqM-aw-S86"/>
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-12" y="87"/>
+            <point key="canvasLocation" x="-126" y="89"/>
         </menu>
         <customView id="RGX-aa-CK2">
             <rect key="frame" x="0.0" y="0.0" width="126" height="55"/>
@@ -66,9 +67,14 @@
                         <action selector="onConnectSwitch:" target="Voe-Tx-rLC" id="xAt-v0-KgE"/>
                     </connections>
                 </customView>
+                <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="dfd-fX-MpQ">
+                    <rect key="frame" x="47" y="12" width="32" height="32"/>
+                </progressIndicator>
             </subviews>
             <constraints>
                 <constraint firstItem="gwL-XT-rvz" firstAttribute="centerX" secondItem="RGX-aa-CK2" secondAttribute="centerX" id="DVF-xs-lM0"/>
+                <constraint firstItem="dfd-fX-MpQ" firstAttribute="centerX" secondItem="gwL-XT-rvz" secondAttribute="centerX" id="Tic-4Z-r2e"/>
+                <constraint firstItem="dfd-fX-MpQ" firstAttribute="centerY" secondItem="gwL-XT-rvz" secondAttribute="centerY" id="WUQ-Bc-tYF"/>
                 <constraint firstItem="gwL-XT-rvz" firstAttribute="centerY" secondItem="RGX-aa-CK2" secondAttribute="centerY" id="myV-xX-lCh"/>
             </constraints>
             <point key="canvasLocation" x="-11" y="229.5"/>

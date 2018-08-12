@@ -22,6 +22,7 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
 @property (nonatomic, strong) PreferencesWindow *preferencesWindow;
 
 @property (weak) IBOutlet ITSwitch *connectSwitch;
+@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
 @end
 
@@ -33,15 +34,13 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     [self helperAuth];
-//    [self setupVPNItem];
-    
 }
 
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+    [[VPNManager shared] disConnect:nil];
 }
-
 
 
 - (void)setupVPNItem {
@@ -49,19 +48,28 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
     self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
     self.vpnItem.menu = self.vpnMenu;
     
+
     [[VPNManager shared] connectChanged:^(VPNStatus status) {
         switch (status) {
             case VPNStatusDisConnect:
                 self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
                 self.connectSwitch.checked = NO;
+                self.connectSwitch.hidden = NO;
+                self.progressIndicator.hidden = YES;
+                
                 break;
             case VPNStatusConnecting:
                 self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
                 self.connectSwitch.checked = NO;
+                self.connectSwitch.hidden = YES;
+                self.progressIndicator.hidden = NO;
+                [self.progressIndicator startAnimation:nil];
                 break;
             case VPNStatusConnected:
                 self.vpnItem.image = [NSImage imageNamed:@"vpn_connect"];
                 self.connectSwitch.checked = YES;
+                self.connectSwitch.hidden = NO;
+                self.progressIndicator.hidden = YES;
                 break;
             default:
                 break;
@@ -72,6 +80,7 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
 - (IBAction)onConnectSwitch:(ITSwitch*)sender {
     if ([VPNManager shared].host.length == 0) {
         sender.checked = NO;
+        [self onConfigServer: nil];
         return;
     }
     
@@ -93,12 +102,6 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
     [self.preferencesWindow showWindow:self];
 }
 
-- (IBAction)onQuit:(id)sender {
-    [[VPNManager shared] disConnect:^(NSError *err) {
-        [NSApp terminate:nil];
-    }];
-}
-
 - (IBAction)openLog:(id)sender {
     [[VPNManager shared] openLog];
 }
@@ -109,15 +112,12 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
 }
 
 - (void)helperAuth {
-    
-    if ([self isServiceInstalled:VPNHelperToolLabel]) {
-        [self setupVPNItem];
-        return;
-    }
-
+//    if ([self isServiceInstalled:VPNHelperToolLabel]) {
+//        [self setupVPNItem];
+//        return;
+//    }
     
     NSError *error = nil;
-    
     OSStatus status = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &self->_authRef);
     if (status != errAuthorizationSuccess) {
         /* AuthorizationCreate really shouldn't fail. */
@@ -136,8 +136,6 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
         NSLog(@"Job is available!");
         
         [self setupVPNItem];
-        
-        
     }
 }
 
@@ -177,8 +175,10 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
     return result;
 }
 
+
 - (BOOL)isServiceInstalled:(NSString *)label {
     CFDictionaryRef dict = SMJobCopyDictionary(kSMDomainSystemLaunchd, (__bridge CFStringRef)label);
     return dict != nil;
 }
+
 @end

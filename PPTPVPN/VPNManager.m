@@ -28,6 +28,13 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 #endif
 
+
+#define __SafeMainQueueBlock(block, ...)\
+dispatch_block_main_async_safe(^{\
+    __SafeBlock(block, __VA_ARGS__);\
+NSLog(@"dfdafds");\
+});
+
 @interface VPNManager()
 
 @property (atomic, strong, readwrite) NSXPCConnection *helperToolConnection;
@@ -83,20 +90,28 @@ dispatch_async(dispatch_get_main_queue(), block);\
     }
     
     self.status = VPNStatusConnecting;
-    [self executeShellPath:@"/usr/sbin/pppd" arguments:@[@"call",PPTPVPNConfigFileName] block:^(NSError *err) {
-        dispatch_block_main_async_safe(^{
-            __SafeBlock(block, err);
+    [self executeShellPath:@"/usr/sbin/pppd" arguments:@[@"call",PPTPVPNConfigFileName] block:^(NSError *err, NSString *output) {
+        if (output.length) {
+            [self writeLog:output];
+        }
+        if ([output containsString:@"pptp_wait_input: Address added"]) {
             self.status = VPNStatusConnected;
-        });
-    }];    
+            __SafeBlock(block, nil);
+
+        } else {
+            self.status = VPNStatusDisConnect;
+            __SafeBlock(block, nil);
+        }
+    }];
 }
 
 - (void)disConnect:(VPNConnectBlock)block {
-    [self executeShellPath:@"/usr/bin/killall" arguments:@[@"pppd"] block:^(NSError *err) {
-        dispatch_block_main_async_safe(^{
-            __SafeBlock(block, err);
+    self.status = VPNStatusConnecting;
+    [self executeShellPath:@"/usr/bin/killall" arguments:@[@"pppd"] block:^(NSError *err, NSString *output) {
+        if (!err) {
             self.status = VPNStatusDisConnect;
-        });
+        }
+        __SafeBlock(block, err);
     }];
 }
 
@@ -105,33 +120,35 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 - (void)openLog {
-    [self executeShellPath:@"/usr/bin/open" arguments:@[PPTPVPNLogFileDirectory] block:^(NSError *err) {
-       
+    [self executeShellPath:@"/usr/bin/open" arguments:@[PPTPVPNLogFileDirectory] block:^(NSError *err, NSString *output) {
+        [self logErrorIfExist:err];
     }];
 }
 
-- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args block:(VPNConnectBlock)block {
+- (void)writeLog:(NSString*)log {
+    NSString *args = [NSString stringWithFormat:@"echo \"%@\" >> %@",log,PPTPVPNLogFileDirectory];
+    [self executeShellPath:@"/bin/bash" arguments:@[@"-c", args] block:^(NSError *err, NSString *output) {
+        [self logErrorIfExist:err];
+    }];
+}
+
+- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args block:(void(^)(NSError *error,NSString *output))block {
     [self connectAndexecuteCommandBlock:^(NSError *err) {
         if (err) {
-            [self logError:err];
-            __SafeBlock(block, err);
+            [self logErrorIfExist:err];
+            __SafeBlock(block, err, nil);
         } else {
             [[self.helperToolConnection remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
                 if (error) {
-                    [self logError:error];
-                    __SafeBlock(block, err);
+                    [self logErrorIfExist:error];
+                    __SafeBlock(block, err, nil);
                 }
-            }] executeShellPath:path arguments:args withReply:^(NSError *errorInfo,NSString *outputString, BOOL success) {
-                NSLog(@"output: %@, %@",outputString, @(success));
-                if (!success) {
-                    NSLog(@"execute fail");
-
-                    __SafeBlock(block, errorInfo);
-                    [self logError:errorInfo];
-                } else {
-                    NSLog(@"execute success");
-                    __SafeBlock(block, nil);
-                }
+            }] executeShellPath:path arguments:args withReply:^(NSError *errorInfo, NSString *outputString) {
+                NSLog(@"output: %@", outputString);
+                [self logErrorIfExist:errorInfo];
+                dispatch_block_main_async_safe(^{
+                    __SafeBlock(block,errorInfo, outputString);
+                });
             }];
         }
     }];
@@ -184,11 +201,13 @@ dispatch_async(dispatch_get_main_queue(), block);\
     commandBlock(nil);
 }
 
-- (void)logError:(NSError *)error
+- (void)logErrorIfExist:(NSError *)error
 // Logs the error to the text view.
 {
     // any thread
 //    assert(error != nil);
-    NSLog(@"error: %@ /  %@ / %@\n", error.localizedDescription, [error domain], @([error code]));
+    if ([error isKindOfClass:[NSError class]]) {
+        NSLog(@"error: %@ /  %@ / %@\n", error.localizedDescription, [error domain], @([error code]));
+    }
 }
 @end

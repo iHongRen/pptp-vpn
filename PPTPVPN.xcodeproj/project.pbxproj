@@ -16,7 +16,7 @@
 		742FB51021155511000FEB1E /* HelpTool-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 742FB50721154DCF000FEB1E /* HelpTool-Info.plist */; };
 		742FB51121155515000FEB1E /* HelpTool-Launchd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 742FB50821154DF5000FEB1E /* HelpTool-Launchd.plist */; };
 		742FB5122115572E000FEB1E /* com.cxy.PPTPVPN.HelpTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		742FB51321155867000FEB1E /* com.cxy.PPTPVPN.HelpTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */; };
+		742FB51321155867000FEB1E /* com.cxy.PPTPVPN.HelpTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		742FB51E21159765000FEB1E /* ITSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB51D21159764000FEB1E /* ITSwitch.m */; };
 		742FB5442115BB62000FEB1E /* PreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB5422115BB62000FEB1E /* PreferencesWindow.m */; };
 		742FB5452115BB62000FEB1E /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 742FB5432115BB62000FEB1E /* PreferencesWindow.xib */; };
@@ -39,7 +39,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		742FB4FE21154D2D000FEB1E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (

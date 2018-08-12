@@ -7,14 +7,9 @@
 //
 
 #import "HelperTool.h"
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <errno.h>
 
 @interface HelperTool () <NSXPCListenerDelegate, HelperToolProtocol>
-
 @property (atomic, strong, readwrite) NSXPCListener *listener;
-
 @end
 
 @implementation HelperTool
@@ -29,12 +24,10 @@
 }
 
 - (void)run {
-    // Tell the XPC listener to start processing requests.
-    
+    // Tell the XPC listener to start processing requests.    
     [self.listener resume];
     
     // Run the run loop forever.
-    
     [[NSRunLoop currentRunLoop] run];
 }
 
@@ -55,86 +48,38 @@
 
 
 #pragma mark - protocol
+- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args withReply:(void(^)(NSError *error, NSString *outputString))reply {
+    
+    NSTask *task = [NSTask new];
+    task.launchPath = path;
+    task.arguments = args;
 
-
-- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args withReply:(void(^)(NSError *error, NSString *outputString, BOOL success))reply {
-//    NSURL *url = [NSURL fileURLWithPath:path];
-//    NSError *err;
-//    [NSTask launchedTaskWithExecutableURL:url arguments:args error:&err terminationHandler:nil];
-//    reply(err);
+    [task setStandardOutput:[NSPipe pipe]];
+    [task setStandardError:[NSPipe pipe]];
     
+    NSError *err;
+    [task launchAndReturnError:&err];
     
-//    NSTask *task = [NSTask new];
-//
-//    [task setLaunchPath:path];
-////    [task setCurrentDirectoryPath:pppdFolder];
-//    [task setArguments:args];
-//
-//    NSPipe *pipe = [NSPipe pipe];
-//    [task setStandardOutput:pipe];
-//    //    [task setStandardError:pipe];
-//    [task setStandardInput:[NSPipe pipe]];
-//
-//    NSMutableString *output = [NSMutableString string];
-//    [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle * _Nonnull file) {
-//        NSData *data = [file availableData];
-//        NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//        [output appendString:str];
-//
-//        reply(nil,str, 0);
-//
-//    }];
-//
-//    [task launch];
-//    return;
-//    bool connected = false;
-//    while (!connected) {
-//        reply(nil,output, connected);
-//
-//        if ([output containsString:@"pptp_wait_input: Address added"]) {
-//            connected = true;
-//        }
-//
-//        if (![task isRunning]) {
-//            connected = false;
-//            break;
-//        }
-//
-//        usleep(500);
-//    }
-//
-//    reply(nil,output, connected);
-    
-    NSPipe* pipe = [NSPipe pipe];
-    
-    NSTask* task = [[NSTask alloc] init];
-    [task setLaunchPath: path];
-    [task setArguments:args];
-    [task setStandardOutput:pipe];
-    
-    NSFileHandle* file = [pipe fileHandleForReading];
-    [task launch];
-    
-    NSString *s = [[NSString alloc] initWithData:[file readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-    reply(nil, s, 0);
+    NSData *outputData = [[task.standardOutput fileHandleForReading] readDataToEndOfFile];
+    NSString *output = [[NSString alloc] initWithData:outputData encoding: NSUTF8StringEncoding];
+  
+    !reply?:reply(err, output);
 }
 
+//Deprecated
 - (void)executeShellCommand:(NSString*)command withReply:(void(^)(NSDictionary * errorInfo))reply {
 
 //    int res = system([command UTF8String]);
     
 
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        reply(@{@"x":@(1)});
-//        NSString *script = [NSString stringWithFormat:@"do shell script \"%@\"",command];
-//        NSAppleScript *appleScript = [[NSAppleScript alloc] initWithSource:script];
-//        NSDictionary *dicError;
-//        if([appleScript executeAndReturnError:&dicError]) {
-//            reply(nil);
-//        } else {
-//            reply(dicError);
-//        }
-//    });
+//    NSString *script = [NSString stringWithFormat:@"do shell script \"%@\"",command];
+//    NSAppleScript *appleScript = [[NSAppleScript alloc] initWithSource:script];
+//    NSDictionary *dicError;
+//    if([appleScript executeAndReturnError:&dicError]) {
+//        reply(nil);
+//    } else {
+//        reply(dicError);
+//    }
   
 }
 

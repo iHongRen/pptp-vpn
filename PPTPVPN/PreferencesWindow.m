@@ -44,24 +44,19 @@
             self.errorTip.stringValue = error.localizedDescription;
         } else {
             [shared connect:^(NSError *err) {
-                if (err) {
-                    self.errorTip.hidden = NO;
-                    self.errorTip.stringValue = err.localizedDescription;
-                } else {
-                    self.errorTip.hidden = YES;
-                    self.errorTip.stringValue = @"";
-                    [self.window performClose:self];
-                }
+//                if (err) {
+//                    self.errorTip.hidden = NO;
+//                    self.errorTip.stringValue = err.localizedDescription;
+//                } else {
+//                    self.errorTip.hidden = YES;
+//                    self.errorTip.stringValue = @"";
+//                    [self.window performClose:self];
+//                }
             }];
+            [self.window performClose:self];
         }
     }];
 }
-
-
-- (IBAction)cancelClick:(id)sender {
-    [self.window performClose:self];
-}
-
 
 
 @end
