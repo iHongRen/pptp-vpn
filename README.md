@@ -1,19 +1,23 @@
 # pptp-vpn
 pptp vpn client for macos
 
-<img src="./screenshots/icon.png" width="25px" height="22px" />**PPTPVPN** 是MacOS上的pptp vpn客户端。
+<img src="./screenshots/icon.png" width="25px" height="22px" />[**PPTPVPN**](https://github.com/iHongRen/pptp-vpn/releases/tag/v1.0) 是MacOS上的pptp vpn客户端。
+
+  
 
 
 
 **截图（Screenshots）**
 
----
+
 
 <img src="./screenshots/menu.png" width="30%" />
 
 
 
 <img src="./screenshots/setting.png" width="50%" />
+
+####   
 
 #### Build & run
 
@@ -46,6 +50,8 @@ pptp vpn client for macos
    如果以上过程中出错请移步**苹果官方Demo**[SMJobBless ReadMe.txt](https://developer.apple.com/library/archive/samplecode/SMJobBless/Listings/ReadMe_txt.html#//apple_ref/doc/uid/DTS40010071-ReadMe_txt-DontLinkElementID_3) (Safari打开).
 
 
+
+####   
 
 #### 参考:
 
