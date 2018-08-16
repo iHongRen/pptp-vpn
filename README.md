@@ -1,25 +1,25 @@
 # pptp-vpn
 pptp vpn client for macos
 
-<img src="./screenshots/icon.png" width="25px" height="22px" />[**PPTPVPN**](https://github.com/iHongRen/pptp-vpn/releases/tag/v1.0) 是MacOS上的pptp vpn客户端。
+<img src="./screenshots/icon.png" width="25px" height="22px" /> [**PPTPVPN**](https://github.com/iHongRen/pptp-vpn/releases/tag/v1.0) 是MacOS上的pptp vpn客户端。
 
-  
-
-
+ </br> 
 
 **截图（Screenshots）**
 
 
 
-<img src="./screenshots/menu.png" width="30%" />
+<img src="./screenshots/menu.png" width="20%" />
 
 
 
-<img src="./screenshots/setting.png" width="50%" />
+<img src="./screenshots/setting.png" width="40%" />
 
 ####   
 
-#### Build & run
+ </br> 
+
+## Build & run
 
 **General**
 
@@ -45,13 +45,13 @@ pptp vpn client for macos
 
    如图：
 
-   <img src="./screenshots/shell.png" />
+   <img src="./screenshots/shell.png" width="70%"/>
 
    如果以上过程中出错请移步**苹果官方Demo**[SMJobBless ReadMe.txt](https://developer.apple.com/library/archive/samplecode/SMJobBless/Listings/ReadMe_txt.html#//apple_ref/doc/uid/DTS40010071-ReadMe_txt-DontLinkElementID_3) (Safari打开).
 
 
 
-####   
+####    </br> 
 
 #### 参考:
 
