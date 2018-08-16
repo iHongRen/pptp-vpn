@@ -85,29 +85,44 @@ NSLog(@"dfdafds");\
 }
 
 - (void)connect:(VPNConnectBlock)block {
-    if (self.status == VPNStatusConnected) {
-        [self disConnect:nil];
-    }
-    
     self.status = VPNStatusConnecting;
-    [self executeShellPath:@"/usr/sbin/pppd" arguments:@[@"call",PPTPVPNConfigFileName] block:^(NSError *err, NSString *output) {
-        if (output.length) {
-            [self writeLog:output];
+    [self deleteLog:^(NSError *err) {
+        if (self.status == VPNStatusConnected) {
+            [self disConnect:nil];
         }
-        if ([output containsString:@"pptp_wait_input: Address added"]) {
-            self.status = VPNStatusConnected;
-            __SafeBlock(block, nil);
+        NSString *cmd = [NSString stringWithFormat:@"sudo pppd call %@ &" ,PPTPVPNConfigFileName];
 
-        } else {
-            self.status = VPNStatusDisConnect;
-            __SafeBlock(block, nil);
-        }
+        [self connectAndexecuteCommandBlock:^(NSError *err) {
+            if (err) {
+                [self logErrorIfExist:err];
+                __SafeBlock(block, err);
+            } else {
+                [[self.helperToolConnection remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
+                    if (error) {
+                        [self logErrorIfExist:error];
+                        __SafeBlock(block, error);
+                    }
+                }] executeShellSystemCommand:cmd withReply:^(NSInteger reply) {
+                    NSLog(@"-----------reply: %@",@(reply));
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self checkIsConnenctedTryTimes:5 block:^(BOOL isConnected) {
+                            NSLog(@"-----------isConnected: %@",@(isConnected));
+
+                            dispatch_block_main_async_safe(^{
+                                __SafeBlock(block, isConnected?nil:[NSError errorWithDomain:NSPOSIXErrorDomain code:-1 userInfo:nil]);
+                                self.status = isConnected ? VPNStatusConnected : VPNStatusDisConnect;
+                            });
+                        }];
+                    });
+                }];
+            }
+        }];
     }];
 }
 
 - (void)disConnect:(VPNConnectBlock)block {
     self.status = VPNStatusConnecting;
-    [self executeShellPath:@"/usr/bin/killall" arguments:@[@"pppd"] block:^(NSError *err, NSString *output) {
+    [self executeShellCommand:@"sudo killall pppd" block:^(NSError *err) {
         if (!err) {
             self.status = VPNStatusDisConnect;
         }
@@ -120,19 +135,74 @@ NSLog(@"dfdafds");\
 }
 
 - (void)openLog {
-    [self executeShellPath:@"/usr/bin/open" arguments:@[PPTPVPNLogFileDirectory] block:^(NSError *err, NSString *output) {
-        [self logErrorIfExist:err];
-    }];
+    NSString *cmd = [NSString stringWithFormat:@"open %@" ,PPTPVPNLogFileDirectory];
+    [self executeShellCommand:cmd block:nil];
 }
 
+- (void)deleteLog:(VPNConnectBlock)block {
+    NSString *cmd = [NSString stringWithFormat:@"rm -f %@" ,PPTPVPNLogFileDirectory];
+    [self executeShellCommand:cmd block:block];
+}
+
+//已使用logfile命令， 这个方法暂时没有用到
 - (void)writeLog:(NSString*)log {
-    NSString *args = [NSString stringWithFormat:@"echo \"%@\" >> %@",log,PPTPVPNLogFileDirectory];
-    [self executeShellPath:@"/bin/bash" arguments:@[@"-c", args] block:^(NSError *err, NSString *output) {
-        [self logErrorIfExist:err];
+    NSString *cmd = [NSString stringWithFormat:@"echo \"%@\" >> %@",log,PPTPVPNLogFileDirectory];
+    [self executeShellCommand:cmd block:nil];
+}
+
+- (void)readLog:(void(^)(NSString* ))block {
+    NSString *cmd = [NSString stringWithFormat:@"cat %@",PPTPVPNLogFileDirectory];
+    [self executeShellPath:@"/bin/bash" arguments:@[@"-c", cmd] block:^(NSError *err, NSString *output) {
+        __SafeBlock(block, output);
     }];
 }
 
-- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args block:(void(^)(NSError *error,NSString *output))block {
+- (void)checkIsConnenctedTryTimes:(NSInteger)times block:(void(^)(BOOL connected))block {
+    [self readLog:^(NSString *output){
+        NSLog(@"-----------output--------------");
+        BOOL isConnected = [output containsString:@"pptp_wait_input: Address added"];
+        if (isConnected) {
+            __SafeBlock(block, YES);
+        } else {
+            if (times) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self checkIsConnenctedTryTimes:times-1 block:block];
+                });
+            } else {
+                __SafeBlock(block, NO);
+            }
+        }
+    }];
+}
+
+- (void)executeShellCommand:(NSString*)cmd block:(VPNConnectBlock)block {
+    [self connectAndexecuteCommandBlock:^(NSError *err) {
+        if (err) {
+            [self logErrorIfExist:err];
+            __SafeBlock(block, err);
+        } else {
+            [[self.helperToolConnection remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
+                if (error) {
+                    [self logErrorIfExist:error];
+                    __SafeBlock(block, error);
+                }
+            }] executeShellCommand:cmd withReply:^(NSDictionary *errorInfo) {
+                NSError *error = nil;
+                if (errorInfo) {
+                    NSLog(@"%@",errorInfo);
+                    error = [NSError errorWithDomain:NSPOSIXErrorDomain code:-1 userInfo:nil];
+                    [self logErrorIfExist:error];
+                }
+                dispatch_block_main_async_safe(^{
+                    __SafeBlock(block, error);
+                });
+            }];
+        }
+    }];
+}
+
+
+- (void)executeShellPath:(NSString*)path arguments:(NSArray*)args block:(void(^)(NSError *error, NSString *output))block {
     [self connectAndexecuteCommandBlock:^(NSError *err) {
         if (err) {
             [self logErrorIfExist:err];
@@ -141,7 +211,7 @@ NSLog(@"dfdafds");\
             [[self.helperToolConnection remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
                 if (error) {
                     [self logErrorIfExist:error];
-                    __SafeBlock(block, err, nil);
+                    __SafeBlock(block, error, nil);
                 }
             }] executeShellPath:path arguments:args withReply:^(NSError *errorInfo, NSString *outputString) {
                 NSLog(@"output: %@", outputString);

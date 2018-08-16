@@ -10,6 +10,7 @@
 
 @interface HelperTool () <NSXPCListenerDelegate, HelperToolProtocol>
 @property (atomic, strong, readwrite) NSXPCListener *listener;
+
 @end
 
 @implementation HelperTool
@@ -19,6 +20,9 @@
         // Set up our XPC listener to handle requests on our Mach service.
         self->_listener = [[NSXPCListener alloc] initWithMachServiceName:@"com.cxy.PPTPVPN.HelpTool"];
         self->_listener.delegate = self;
+        
+  
+      
     }
     return self;
 }
@@ -54,34 +58,47 @@
     task.launchPath = path;
     task.arguments = args;
 
-    [task setStandardOutput:[NSPipe pipe]];
+    NSPipe *pipe = [NSPipe pipe];
+//    __block NSString *outputString = @"";
+//    pipe.fileHandleForReading.readabilityHandler = ^ (NSFileHandle *fileHandle) {
+//        NSData *data = [fileHandle availableData];
+//        NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"read: %@", str);
+//        outputString = [outputString stringByAppendingString:str];
+//        !reply?:reply(nil, str);
+//
+//        if ([str containsString:@"pptp_wait_input: Address added"]) {
+//            !reply?:reply(nil, @"ss");
+//        }
+//    };
+    [task setStandardOutput:pipe];
+
     [task setStandardError:[NSPipe pipe]];
-    
     NSError *err;
     [task launchAndReturnError:&err];
-    
+    [task waitUntilExit];
+
     NSData *outputData = [[task.standardOutput fileHandleForReading] readDataToEndOfFile];
     NSString *output = [[NSString alloc] initWithData:outputData encoding: NSUTF8StringEncoding];
-  
     !reply?:reply(err, output);
 }
 
-//Deprecated
+
 - (void)executeShellCommand:(NSString*)command withReply:(void(^)(NSDictionary * errorInfo))reply {
-
-//    int res = system([command UTF8String]);
-    
-
-//    NSString *script = [NSString stringWithFormat:@"do shell script \"%@\"",command];
-//    NSAppleScript *appleScript = [[NSAppleScript alloc] initWithSource:script];
-//    NSDictionary *dicError;
-//    if([appleScript executeAndReturnError:&dicError]) {
-//        reply(nil);
-//    } else {
-//        reply(dicError);
-//    }
-  
+    NSString *script = [NSString stringWithFormat:@"do shell script \"%@\"",command];
+    NSAppleScript *appleScript = [[NSAppleScript alloc] initWithSource:script];
+    NSDictionary *dicError = nil;
+    [appleScript executeAndReturnError:&dicError];
+    if (dicError) {
+        !reply?:reply(dicError);
+    } else {
+        !reply?:reply(nil);
+    }
 }
 
+- (void)executeShellSystemCommand:(NSString *)command withReply:(void (^)(NSInteger))reply {
+    int res = system([command UTF8String]);
+    !reply?:reply(res);
+}
 
 @end

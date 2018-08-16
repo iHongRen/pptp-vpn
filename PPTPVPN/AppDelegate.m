@@ -112,10 +112,10 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
 }
 
 - (void)helperAuth {
-//    if ([self isServiceInstalled:VPNHelperToolLabel]) {
-//        [self setupVPNItem];
-//        return;
-//    }
+    if ([self isServiceInstalled:VPNHelperToolLabel]) {
+        [self setupVPNItem];
+        return;
+    }
     
     NSError *error = nil;
     OSStatus status = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &self->_authRef);

@@ -64,8 +64,8 @@ NSString *const PPTPVPNLogFileDirectory = @"/tmp/pptp_vpn_log";;
     NSString *_remoteaddress = [NSString stringWithFormat:@"remoteaddress \"%@\"\n",remoteaddress?:@""];
     NSString *_user = [NSString stringWithFormat:@"user \"%@\"\n",user?:@""];
     NSString *_password = [NSString stringWithFormat:@"password \"%@\"\n",password?:@""];
-
-    NSString *vpnConfig = [NSString stringWithFormat:@"%@%@%@",_remoteaddress,_user,_password];
+    NSString *logfile = [NSString stringWithFormat:@"logfile %@", PPTPVPNLogFileDirectory];
+    NSString *vpnConfig = [NSString stringWithFormat:@"%@%@%@%@",_remoteaddress,_user,_password, logfile];
     
     NSError *err;
     NSString *script = [vpnConfig stringByAppendingString:[self VPNFileOtherScript]];

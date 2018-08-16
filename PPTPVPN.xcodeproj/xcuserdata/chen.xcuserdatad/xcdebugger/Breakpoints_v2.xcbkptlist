@@ -6,16 +6,190 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HelpTool/HelperTool.m"
-            timestampString = "555779796.646584"
+            filePath = "PPTPVPN/VPNManager.m"
+            timestampString = "556088568.181707"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-executeShellPath:arguments:withReply:"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "-executeShellCommand:block:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTPVPN/VPNManager.m"
+            timestampString = "556088568.181762"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "-executeShellCommand:block:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[VPNManager executeShellCommand:block:]"
+                  moduleName = "PPTPVPN"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chen/Documents/project/my_opensource/PPTPVPN/PPTPVPN/VPNManager.m"
+                  timestampString = "556087971.329221"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "179"
+                  endingLineNumber = "179"
+                  offsetFromSymbolStart = "98">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__40-[VPNManager executeShellCommand:block:]_block_invoke"
+                  moduleName = "PPTPVPN"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chen/Documents/project/my_opensource/PPTPVPN/PPTPVPN/VPNManager.m"
+                  timestampString = "556087971.331226"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "47">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.169"
+                  moduleName = "PPTPVPN"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chen/Documents/project/my_opensource/PPTPVPN/PPTPVPN/VPNManager.m"
+                  timestampString = "556087971.3347239"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "179"
+                  endingLineNumber = "179"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTPVPN/VPNManager.m"
+            timestampString = "556088568.181812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "-executeShellCommand:block:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__40-[VPNManager executeShellCommand:block:]_block_invoke"
+                  moduleName = "PPTPVPN"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chen/Documents/project/my_opensource/PPTPVPN/PPTPVPN/VPNManager.m"
+                  timestampString = "556087971.344644"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "156">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__40-[VPNManager executeShellCommand:block:]_block_invoke_2"
+                  moduleName = "PPTPVPN"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chen/Documents/project/my_opensource/PPTPVPN/PPTPVPN/VPNManager.m"
+                  timestampString = "556087971.348074"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "185"
+                  endingLineNumber = "185"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.149"
+                  moduleName = "PPTPVPN"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chen/Documents/project/my_opensource/PPTPVPN/PPTPVPN/VPNManager.m"
+                  timestampString = "556087971.350642"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTPVPN/VPNManager.m"
+            timestampString = "556088568.181859"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "-executeShellCommand:block:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTPVPN/VPNManager.m"
+            timestampString = "556088568.181905"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "-executeShellCommand:block:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTPVPN/VPNManager.m"
+            timestampString = "556088568.181951"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "-executeShellCommand:block:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

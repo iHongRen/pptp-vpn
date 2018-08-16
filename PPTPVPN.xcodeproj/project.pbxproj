@@ -11,7 +11,6 @@
 		742FB4EF21154CEB000FEB1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 742FB4EE21154CEB000FEB1E /* Assets.xcassets */; };
 		742FB4F521154CEC000FEB1E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB4F421154CEC000FEB1E /* main.m */; };
 		742FB50321154D2D000FEB1E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 742FB50221154D2D000FEB1E /* main.m */; };
-		742FB50C211551AA000FEB1E /* SMJobBlessUtil.py in Resources */ = {isa = PBXBuildFile; fileRef = 742FB50B211551AA000FEB1E /* SMJobBlessUtil.py */; };
 		742FB50F21155506000FEB1E /* com.cxy.PPTPVPN.HelpTool in Resources */ = {isa = PBXBuildFile; fileRef = 742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */; };
 		742FB51021155511000FEB1E /* HelpTool-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 742FB50721154DCF000FEB1E /* HelpTool-Info.plist */; };
 		742FB51121155515000FEB1E /* HelpTool-Launchd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 742FB50821154DF5000FEB1E /* HelpTool-Launchd.plist */; };
@@ -82,6 +81,7 @@
 		742FB5672115F15A000FEB1E /* VPNManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNManager.m; sourceTree = "<group>"; };
 		7436228F2116B13F00D75E6A /* HelperTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelperTool.h; sourceTree = "<group>"; };
 		743622902116B13F00D75E6A /* HelperTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelperTool.m; sourceTree = "<group>"; };
+		743DDBF72121E7DC00668E65 /* Uninstall.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Uninstall.sh; sourceTree = "<group>"; };
 		746AB8462117DE6A0081442B /* VPNFiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNFiler.h; sourceTree = "<group>"; };
 		746AB8472117DE6A0081442B /* VPNFiler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNFiler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				742FB50B211551AA000FEB1E /* SMJobBlessUtil.py */,
+				743DDBF72121E7DC00668E65 /* Uninstall.sh */,
 				742FB4E721154CEA000FEB1E /* PPTPVPN */,
 				742FB50121154D2D000FEB1E /* HelpTool */,
 				742FB4E621154CEA000FEB1E /* Products */,
@@ -255,7 +256,6 @@
 				742FB51121155515000FEB1E /* HelpTool-Launchd.plist in Resources */,
 				742FB51021155511000FEB1E /* HelpTool-Info.plist in Resources */,
 				742FB50F21155506000FEB1E /* com.cxy.PPTPVPN.HelpTool in Resources */,
-				742FB50C211551AA000FEB1E /* SMJobBlessUtil.py in Resources */,
 				742FB4EF21154CEB000FEB1E /* Assets.xcassets in Resources */,
 				742FB5652115EB8D000FEB1E /* MainMenu.xib in Resources */,
 			);
