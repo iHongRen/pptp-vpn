@@ -19,7 +19,7 @@ pptp vpn client for macos
 
  </br> 
 
-## Build & run
+## Build & Run
 
 **General**
 
