@@ -22,7 +22,7 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
 @property (nonatomic, strong) PreferencesWindow *preferencesWindow;
 
 @property (weak) IBOutlet ITSwitch *connectSwitch;
-@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
+@property (weak) IBOutlet NSTextField *wait;
 
 @end
 
@@ -55,21 +55,19 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
                 self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
                 self.connectSwitch.checked = NO;
                 self.connectSwitch.hidden = NO;
-                self.progressIndicator.hidden = YES;
-                
+                self.wait.hidden = YES;                
                 break;
             case VPNStatusConnecting:
                 self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
                 self.connectSwitch.checked = NO;
                 self.connectSwitch.hidden = YES;
-                self.progressIndicator.hidden = NO;
-                [self.progressIndicator startAnimation:nil];
+                self.wait.hidden = NO;
                 break;
             case VPNStatusConnected:
                 self.vpnItem.image = [NSImage imageNamed:@"vpn_connect"];
                 self.connectSwitch.checked = YES;
                 self.connectSwitch.hidden = NO;
-                self.progressIndicator.hidden = YES;
+                self.wait.hidden = YES;
                 break;
             default:
                 break;

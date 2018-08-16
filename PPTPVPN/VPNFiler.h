@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 extern NSString *const PPTPVPNConfigFileName;
-extern NSString *const PPTPVPNLogFileDirectory;
+extern NSString *const PPTPVPNLogFile;
 
 @interface VPNFiler : NSObject
 

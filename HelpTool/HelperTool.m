@@ -19,10 +19,7 @@
     if (self = [super init]) {
         // Set up our XPC listener to handle requests on our Mach service.
         self->_listener = [[NSXPCListener alloc] initWithMachServiceName:@"com.cxy.PPTPVPN.HelpTool"];
-        self->_listener.delegate = self;
-        
-  
-      
+        self->_listener.delegate = self;                
     }
     return self;
 }
@@ -53,52 +50,41 @@
 
 #pragma mark - protocol
 - (void)executeShellPath:(NSString*)path arguments:(NSArray*)args withReply:(void(^)(NSError *error, NSString *outputString))reply {
-    
-    NSTask *task = [NSTask new];
-    task.launchPath = path;
-    task.arguments = args;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSTask *task = [NSTask new];
+        task.launchPath = path;
+        task.arguments = args;
 
-    NSPipe *pipe = [NSPipe pipe];
-//    __block NSString *outputString = @"";
-//    pipe.fileHandleForReading.readabilityHandler = ^ (NSFileHandle *fileHandle) {
-//        NSData *data = [fileHandle availableData];
-//        NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//        NSLog(@"read: %@", str);
-//        outputString = [outputString stringByAppendingString:str];
-//        !reply?:reply(nil, str);
-//
-//        if ([str containsString:@"pptp_wait_input: Address added"]) {
-//            !reply?:reply(nil, @"ss");
-//        }
-//    };
-    [task setStandardOutput:pipe];
+        NSPipe *pipe = [NSPipe pipe];
+        [task setStandardOutput:pipe];
 
-    [task setStandardError:[NSPipe pipe]];
-    NSError *err;
-    [task launchAndReturnError:&err];
-    [task waitUntilExit];
+        [task setStandardError:[NSPipe pipe]];
+        NSError *err;
+        [task launchAndReturnError:&err];
+        [task waitUntilExit];
 
-    NSData *outputData = [[task.standardOutput fileHandleForReading] readDataToEndOfFile];
-    NSString *output = [[NSString alloc] initWithData:outputData encoding: NSUTF8StringEncoding];
-    !reply?:reply(err, output);
+        NSData *outputData = [[task.standardOutput fileHandleForReading] readDataToEndOfFile];
+        NSString *output = [[NSString alloc] initWithData:outputData encoding: NSUTF8StringEncoding];
+        !reply?:reply(err, output);
+    });
 }
 
 
 - (void)executeShellCommand:(NSString*)command withReply:(void(^)(NSDictionary * errorInfo))reply {
-    NSString *script = [NSString stringWithFormat:@"do shell script \"%@\"",command];
-    NSAppleScript *appleScript = [[NSAppleScript alloc] initWithSource:script];
-    NSDictionary *dicError = nil;
-    [appleScript executeAndReturnError:&dicError];
-    if (dicError) {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *script = [NSString stringWithFormat:@"do shell script \"%@\"",command];
+        NSAppleScript *appleScript = [[NSAppleScript alloc] initWithSource:script];
+        NSDictionary *dicError = nil;
+        [appleScript executeAndReturnError:&dicError];
         !reply?:reply(dicError);
-    } else {
-        !reply?:reply(nil);
-    }
+    });
 }
 
 - (void)executeShellSystemCommand:(NSString *)command withReply:(void (^)(NSInteger))reply {
-    int res = system([command UTF8String]);
-    !reply?:reply(res);
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        int res = system([command UTF8String]);
+        !reply?:reply(res);
+    });
 }
 
 @end

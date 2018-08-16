@@ -10,7 +10,7 @@
 
 NSString *const PPTPVPNFileDirectory = @"/etc/ppp/peers";
 NSString *const PPTPVPNConfigFileName = @"this_is_a_pptp_vpn_config_file_0";
-NSString *const PPTPVPNLogFileDirectory = @"/tmp/pptp_vpn_log";;
+NSString *const PPTPVPNLogFile = @"/tmp/pptp_vpn_log.txt";;
 
 @implementation VPNFiler
 
@@ -64,7 +64,7 @@ NSString *const PPTPVPNLogFileDirectory = @"/tmp/pptp_vpn_log";;
     NSString *_remoteaddress = [NSString stringWithFormat:@"remoteaddress \"%@\"\n",remoteaddress?:@""];
     NSString *_user = [NSString stringWithFormat:@"user \"%@\"\n",user?:@""];
     NSString *_password = [NSString stringWithFormat:@"password \"%@\"\n",password?:@""];
-    NSString *logfile = [NSString stringWithFormat:@"logfile %@", PPTPVPNLogFileDirectory];
+    NSString *logfile = [NSString stringWithFormat:@"logfile %@", PPTPVPNLogFile];
     NSString *vpnConfig = [NSString stringWithFormat:@"%@%@%@%@",_remoteaddress,_user,_password, logfile];
     
     NSError *err;

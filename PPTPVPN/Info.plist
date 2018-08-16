@@ -20,6 +20,8 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>LSUIElement</key>
@@ -33,7 +35,7 @@
 	<key>SMPrivilegedExecutables</key>
 	<dict>
 		<key>com.cxy.PPTPVPN.HelpTool</key>
-		<string>identifier &quot;com.cxy.PPTPVPN.HelpTool&quot; and anchor apple generic and certificate leaf[subject.CN] = &quot;Mac Developer: chenpolu@foxmail.com (A6N22GWPU9)&quot; and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		<string>identifier "com.cxy.PPTPVPN.HelpTool" and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: chenpolu@foxmail.com (A6N22GWPU9)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</dict>
 </dict>
 </plist>
