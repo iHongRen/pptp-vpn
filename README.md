@@ -9,11 +9,11 @@ pptp vpn client for macos
 
 
 
-<img src="./screenshots/menu.png" width="20%" />
+<img src="./screenshots/menu.png" width="20%" />                      <img src="./screenshots/setting.png" width="40%" />
 
 
 
-<img src="./screenshots/setting.png" width="40%" />
+
 
 ####   
 
@@ -27,7 +27,6 @@ pptp vpn client for macos
 
 - Signing Certificate 设置为 Mac Developer
 
-  
 
 **Build**
 
@@ -45,7 +44,7 @@ pptp vpn client for macos
 
    如图：
 
-   <img src="./screenshots/shell.png" width="70%"/>
+<img src="./screenshots/shell.png" width="70%"/>
 
    如果以上过程中出错请移步**苹果官方Demo**[SMJobBless ReadMe.txt](https://developer.apple.com/library/archive/samplecode/SMJobBless/Listings/ReadMe_txt.html#//apple_ref/doc/uid/DTS40010071-ReadMe_txt-DontLinkElementID_3) (Safari打开).
 
@@ -64,3 +63,9 @@ pptp vpn client for macos
 [Execute a terminal command from a Cocoa app](https://stackoverflow.com/questions/412562/execute-a-terminal-command-from-a-cocoa-app/412573#412573)
 
  [AlonsoZhang/PPTP](https://github.com/AlonsoZhang/PPTP)
+
+
+
+#### 打赏：(感谢支持)
+
+<img src='./screenshots/alipay.png' width='20%' />        <img src='./screenshots/wxpay.png' width='20%' />
