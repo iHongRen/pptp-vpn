@@ -1,7 +1,7 @@
 # pptp-vpn
-pptp vpn client for macos
+pptp vpn client for macos 
 
-<img src="./screenshots/icon.png" width="25px" height="22px" /> [**PPTPVPN**](https://github.com/iHongRen/pptp-vpn/releases/tag/v1.0) 是MacOS上的pptp vpn客户端。
+<img src="./screenshots/icon.png" width="25px" height="22px" /> [**PPTPVPN**](https://github.com/iHongRen/pptp-vpn/releases/tag/v1.0) 是MacOS上的pptp vpn客户端。 [点击下载](https://github.com/iHongRen/pptp-vpn/releases)
 
  </br> 
 
@@ -66,6 +66,6 @@ pptp vpn client for macos
 
 ####    </br> 
 
-#### 打赏：(感谢支持)
 
-<img src='./screenshots/alipay.png' width='20%' />&emsp;&emsp;<img src='./screenshots/wxpay.png' width='20%' />
+
+### [打赏 (Donation)](https://github.com/iHongRen/Donation/blob/master/Donation.md)
