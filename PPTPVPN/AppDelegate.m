@@ -47,7 +47,7 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
     self.vpnItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
     self.vpnItem.menu = self.vpnMenu;
-    
+
 
     [[VPNManager shared] connectChanged:^(VPNStatus status) {
         switch (status) {
@@ -64,7 +64,7 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
                 self.wait.hidden = NO;
                 break;
             case VPNStatusConnected:
-                self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
+                self.vpnItem.image = [NSImage imageNamed:@"vpn_connect"];
                 self.connectSwitch.checked = YES;
                 self.connectSwitch.hidden = NO;
                 self.wait.hidden = YES;
