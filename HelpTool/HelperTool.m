@@ -19,7 +19,10 @@
     if (self = [super init]) {
         // Set up our XPC listener to handle requests on our Mach service.
         self->_listener = [[NSXPCListener alloc] initWithMachServiceName:@"com.cxy.PPTPVPN.HelpTool"];
-        self->_listener.delegate = self;                
+        self->_listener.delegate = self;
+        
+       
+
     }
     return self;
 }
@@ -27,7 +30,7 @@
 - (void)run {
     // Tell the XPC listener to start processing requests.    
     [self.listener resume];
-    
+   
     // Run the run loop forever.
     [[NSRunLoop currentRunLoop] run];
 }
@@ -50,6 +53,7 @@
 
 #pragma mark - protocol
 - (void)executeShellPath:(NSString*)path arguments:(NSArray*)args withReply:(void(^)(NSError *error, NSString *outputString))reply {
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSTask *task = [NSTask new];
         task.launchPath = path;
@@ -81,6 +85,7 @@
 }
 
 - (void)executeShellSystemCommand:(NSString *)command withReply:(void (^)(NSInteger))reply {
+
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         int res = system([command UTF8String]);
         !reply?:reply(res);

@@ -33,4 +33,7 @@ typedef void (^VPNConnectChangedBlock)(VPNStatus status);
 
 - (void)connectChanged:(VPNConnectChangedBlock)block;
 - (void)openLog;
+
+- (void)executeShellCommand:(NSString*)cmd block:(VPNConnectBlock)block;
+- (void)executeSystemShellCommand:(NSString*)cmd block:(VPNConnectBlock)block;
 @end

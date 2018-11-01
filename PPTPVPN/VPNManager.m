@@ -83,39 +83,26 @@ dispatch_block_main_async_safe(^{\
 
 - (void)connect:(VPNConnectBlock)block {
     self.status = VPNStatusConnecting;
-    [self deleteLog:^(NSError *err) {
+    [self deleteLog:^(NSError *delErr) {
         if (self.status == VPNStatusConnected) {
             [self disConnect:nil];
         }
+        
         NSString *cmd = [NSString stringWithFormat:@"sudo pppd call %@ &" ,PPTPVPNConfigFileName];
-
-        [self connectAndexecuteCommandBlock:^(NSError *err) {
-            if (err) {
-                [self logErrorIfExist:err];
-                __SafeMainQueueBlock(block, err);
-            } else {
-                [[self.helperToolConnection remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
-                    if (error) {
-                        [self logErrorIfExist:error];
-                        __SafeMainQueueBlock(block, error);
+        [self executeSystemShellCommand:cmd block:^(NSError *err) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self checkIsConnenctedTryTimes:5 block:^(BOOL isConnected) {
+                    NSLog(@"-----------isConnected: %@",@(isConnected));
+                    if (isConnected) {
+                        __SafeMainQueueBlock(block, nil);
+                        self.status = VPNStatusConnected;
+                    } else {
+                        [self logErrorIfExist:err];
+                        self.status = VPNStatusDisConnect;
+                        __SafeMainQueueBlock(block, err);
                     }
-                }] executeShellSystemCommand:cmd withReply:^(NSInteger reply) {
-                    NSLog(@"-----------reply: %@",@(reply));
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [self checkIsConnenctedTryTimes:5 block:^(BOOL isConnected) {
-                            NSLog(@"-----------isConnected: %@",@(isConnected));
-
-                            dispatch_block_main_async_safe(^{
-                                __SafeMainQueueBlock(block, isConnected?nil:[NSError errorWithDomain:NSPOSIXErrorDomain code:-1 userInfo:nil]);
-                                self.status = isConnected ? VPNStatusConnected : VPNStatusDisConnect;
-                                if (!isConnected) {
-                                    [self disConnect:nil];
-                                }
-                            });
-                        }];
-                    });
                 }];
-            }
+            });
         }];
     }];
 }
@@ -123,9 +110,7 @@ dispatch_block_main_async_safe(^{\
 - (void)disConnect:(VPNConnectBlock)block {
     self.status = VPNStatusConnecting;
     [self executeShellCommand:@"sudo killall pppd" block:^(NSError *err) {
-        if (!err) {
-            self.status = VPNStatusDisConnect;
-        }
+        self.status = VPNStatusDisConnect;
         __SafeMainQueueBlock(block, err);
     }];
 }
@@ -178,6 +163,29 @@ dispatch_block_main_async_safe(^{\
     }];
 }
 
+- (void)executeSystemShellCommand:(NSString*)cmd block:(VPNConnectBlock)block {
+    [self connectAndexecuteCommandBlock:^(NSError *err) {
+        if (err) {
+            __SafeMainQueueBlock(block, err);
+        } else {
+            [[self.helperToolConnection remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
+                if (error) {
+                    __SafeMainQueueBlock(block, error);
+                }
+            }] executeShellSystemCommand:cmd withReply:^(NSInteger reply) {
+                NSLog(@"-----------reply: %@",@(reply));
+                if (reply == 0) {
+                    __SafeMainQueueBlock(block, nil);
+                } else {
+                    NSError *erro = [self createError:[NSString stringWithFormat:@"%@执行失败",cmd]];
+                    __SafeMainQueueBlock(block, erro);
+                }
+            }];
+        }
+    }];
+}
+
+
 - (void)executeShellCommand:(NSString*)cmd block:(VPNConnectBlock)block {
     [self connectAndexecuteCommandBlock:^(NSError *err) {
         if (err) {
@@ -193,7 +201,7 @@ dispatch_block_main_async_safe(^{\
                 NSError *erro = nil;
                 if (errorInfo) {
                     NSLog(@"%@",errorInfo);
-                    erro = [NSError errorWithDomain:NSPOSIXErrorDomain code:-1 userInfo:nil];
+                    erro = [self createError:[NSString stringWithFormat:@"%@执行失败",cmd]];
                     [self logErrorIfExist:erro];
                 }
                 __SafeMainQueueBlock(block, erro);
@@ -202,22 +210,21 @@ dispatch_block_main_async_safe(^{\
     }];
 }
 
-
 - (void)executeShellPath:(NSString*)path arguments:(NSArray*)args block:(void(^)(NSError *error, NSString *output))block {
     [self connectAndexecuteCommandBlock:^(NSError *err) {
         if (err) {
             [self logErrorIfExist:err];
             __SafeMainQueueBlock(block, err, nil);
         } else {
-            [[self.helperToolConnection remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
-                if (error) {
-                    [self logErrorIfExist:error];
-                    __SafeMainQueueBlock(block, error, nil);
+            [[self.helperToolConnection remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull errorx) {
+                if (errorx) {
+                    [self logErrorIfExist:errorx];
+                    __SafeMainQueueBlock(block, errorx, nil);
                 }
             }] executeShellPath:path arguments:args withReply:^(NSError *errorInfo, NSString *outputString) {
                 NSLog(@"output: %@", outputString);
                 [self logErrorIfExist:errorInfo];
-                __SafeMainQueueBlock(block,errorInfo, outputString);
+                __SafeMainQueueBlock(block, errorInfo, outputString);
             }];
         }
     }];
@@ -278,5 +285,11 @@ dispatch_block_main_async_safe(^{\
     if ([error isKindOfClass:[NSError class]]) {
         NSLog(@"error: %@ /  %@ / %@\n", error.localizedDescription, [error domain], @([error code]));
     }
+}
+
+- (NSError*)createError:(NSString*)errText {
+    return [NSError errorWithDomain:NSPOSIXErrorDomain
+                               code:-1
+                           userInfo:@{NSLocalizedDescriptionKey: errText}];
 }
 @end

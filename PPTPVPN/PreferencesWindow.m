@@ -41,8 +41,9 @@
     [VPNFiler writeVPNFileHost:shared.host user:shared.username password:shared.password block:^(NSError *error) {      
         if (error) {
             self.errorTip.hidden = NO;
-            self.errorTip.stringValue = error.localizedDescription;
+            self.errorTip.stringValue = error.localizedDescription?:@"";
         } else {
+            
             [shared connect:^(NSError *err) {
 //                if (err) {
 //                    self.errorTip.hidden = NO;

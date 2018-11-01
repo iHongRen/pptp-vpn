@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>use pptp vpn</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -35,7 +37,7 @@
 	<key>SMPrivilegedExecutables</key>
 	<dict>
 		<key>com.cxy.PPTPVPN.HelpTool</key>
-		<string>identifier "com.cxy.PPTPVPN.HelpTool" and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: chenpolu@foxmail.com (A6N22GWPU9)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		<string>identifier &quot;com.cxy.PPTPVPN.HelpTool&quot; and anchor apple generic and certificate leaf[subject.CN] = &quot;Mac Developer: xianyin Chen (A6N22GWPU9)&quot; and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</dict>
 </dict>
 </plist>

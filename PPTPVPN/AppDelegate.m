@@ -64,7 +64,7 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
                 self.wait.hidden = NO;
                 break;
             case VPNStatusConnected:
-                self.vpnItem.image = [NSImage imageNamed:@"vpn_connect"];
+                self.vpnItem.image = [NSImage imageNamed:@"vpn_disconnect"];
                 self.connectSwitch.checked = YES;
                 self.connectSwitch.hidden = NO;
                 self.wait.hidden = YES;
@@ -165,7 +165,7 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
             error = CFBridgingRelease(cfError);
         }
     }
-    if ( ! result && (errorPtr != NULL) ) {
+    if (!result && (errorPtr != NULL) ) {
         assert(error != nil);
         *errorPtr = error;
     }

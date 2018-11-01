@@ -7,6 +7,7 @@
 //  https://github.com/iHongRen/pptp-vpn
 
 #import "VPNFiler.h"
+#import "VPNManager.h"
 
 NSString *const PPTPVPNFileDirectory = @"/etc/ppp/peers";
 NSString *const PPTPVPNConfigFileName = @"this_is_a_pptp_vpn_config_file_0";
@@ -18,32 +19,7 @@ NSString *const PPTPVPNLogFile = @"/tmp/pptp_vpn_log.txt";;
     return [PPTPVPNFileDirectory stringByAppendingPathComponent: PPTPVPNConfigFileName];
 }
 
-+ (BOOL)createVPNFileDirectoryIfNeed {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL isDir;
-    BOOL isExistFile = [fileManager fileExistsAtPath:PPTPVPNFileDirectory isDirectory:&isDir];
-    
-    if(isExistFile && isDir) {
-        return YES;
-    }
-    
-    return [fileManager createDirectoryAtPath:PPTPVPNFileDirectory withIntermediateDirectories:YES attributes:nil error:nil];
-}
 
-+ (BOOL)createVPNFileIfNeed {
-    if(![self createVPNFileDirectoryIfNeed]) {
-        return NO;
-    }
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL isExistFile = [fileManager fileExistsAtPath:[self VPNFilePath]];
-    
-    if(isExistFile) {
-        return YES;
-    }
-    
-    return [fileManager createFileAtPath:[self VPNFilePath] contents:nil attributes:nil];
-}
 
 /**
  --- config ---
@@ -55,25 +31,24 @@ NSString *const PPTPVPNLogFile = @"/tmp/pptp_vpn_log.txt";;
                     user:(NSString*)user
                 password:(NSString*)password
                    block:(void(^)(NSError *error))complete {
-    if(![self createVPNFileIfNeed]) {
-        NSError *err = [NSError errorWithDomain:NSPOSIXErrorDomain code:0 userInfo:nil];
-        complete(err);
-        return;
-    }
     
-    NSString *_remoteaddress = [NSString stringWithFormat:@"remoteaddress \"%@\"\n",remoteaddress?:@""];
-    NSString *_user = [NSString stringWithFormat:@"user \"%@\"\n",user?:@""];
-    NSString *_password = [NSString stringWithFormat:@"password \"%@\"\n",password?:@""];
-    NSString *logfile = [NSString stringWithFormat:@"logfile %@", PPTPVPNLogFile];
-    NSString *vpnConfig = [NSString stringWithFormat:@"%@%@%@%@",_remoteaddress,_user,_password, logfile];
-    
-    NSError *err;
-    NSString *script = [vpnConfig stringByAppendingString:[self VPNFileOtherScript]];
-    
-    [script writeToFile:[self VPNFilePath] atomically:YES encoding:NSUTF8StringEncoding error:&err];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        !complete?:complete(err);
-    });
+    NSString *cmd = [NSString stringWithFormat:@"sudo mkdir -p -m=rwx %@", PPTPVPNFileDirectory];
+    [[VPNManager shared] executeShellCommand:cmd block:^(NSError *err) {
+        if (!err) {
+            NSString *_remoteaddress = [NSString stringWithFormat:@"remoteaddress \"%@\"\n",remoteaddress?:@""];
+            NSString *_user = [NSString stringWithFormat:@"user \"%@\"\n",user?:@""];
+            NSString *_password = [NSString stringWithFormat:@"password \"%@\"\n",password?:@""];
+            NSString *logfile = [NSString stringWithFormat:@"logfile %@\n", PPTPVPNLogFile];
+            NSString *vpnConfig = [NSString stringWithFormat:@"%@%@%@%@",_remoteaddress,_user,_password, logfile];
+            
+            NSString *scriptFile = [vpnConfig stringByAppendingString:[self VPNFileOtherScript]];
+        
+            NSString *cmdx = [NSString stringWithFormat:@"echo \"%@\" > %@",scriptFile, [self VPNFilePath]];
+            [[VPNManager shared] executeSystemShellCommand:cmdx block:complete];
+        } else {
+            !complete?:complete(err);
+        }
+    }];
 }
 
 // https://github.com/davidjosefson/lex-integrity-mac
@@ -82,7 +57,7 @@ NSString *const PPTPVPNLogFile = @"/tmp/pptp_vpn_log.txt";;
 @"## Other settings\n\
 plugin PPTP.ppp\n\
 noauth\n\
-redialcount 1\n\
+redialcount 5\n\
 redialtimer 5\n\
 idle 1800\n\
 mru 1436\n\

@@ -65,7 +65,6 @@
 		742FB4EE21154CEB000FEB1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		742FB4F321154CEC000FEB1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		742FB4F421154CEC000FEB1E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		742FB4F621154CEC000FEB1E /* PPTPVPN.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PPTPVPN.entitlements; sourceTree = "<group>"; };
 		742FB50021154D2D000FEB1E /* com.cxy.PPTPVPN.HelpTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.cxy.PPTPVPN.HelpTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		742FB50221154D2D000FEB1E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		742FB50721154DCF000FEB1E /* HelpTool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelpTool-Info.plist"; sourceTree = "<group>"; };
@@ -141,7 +140,6 @@
 				742FB4EE21154CEB000FEB1E /* Assets.xcassets */,
 				742FB4F321154CEC000FEB1E /* Info.plist */,
 				742FB4F421154CEC000FEB1E /* main.m */,
-				742FB4F621154CEC000FEB1E /* PPTPVPN.entitlements */,
 			);
 			path = PPTPVPN;
 			sourceTree = "<group>";
