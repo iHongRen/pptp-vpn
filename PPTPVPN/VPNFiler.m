@@ -57,7 +57,7 @@ NSString *const PPTPVPNLogFile = @"/tmp/pptp_vpn_log.txt";;
 @"## Other settings\n\
 plugin PPTP.ppp\n\
 noauth\n\
-redialcount 5\n\
+redialcount 1\n\
 redialtimer 5\n\
 idle 1800\n\
 mru 1436\n\

@@ -12,6 +12,8 @@ extern NSString *const PPTPVPNLogFile;
 
 @interface VPNFiler : NSObject
 
++ (NSString*)VPNFilePath;
+
 /**
  --- config ---
  remoteaddress \"vpn.ihongren.com\"\n\

@@ -82,6 +82,15 @@ dispatch_block_main_async_safe(^{\
 }
 
 - (void)connect:(VPNConnectBlock)block {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[VPNFiler VPNFilePath]]) {
+        NSError *err = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                           code:-2
+                                       userInfo:@{NSLocalizedDescriptionKey: @"请正确填写VPN账号"}];
+        self.status = VPNStatusDisConnect;
+        __SafeMainQueueBlock(block, err);
+        return;
+    }    
+    
     self.status = VPNStatusConnecting;
     [self deleteLog:^(NSError *delErr) {
         if (self.status == VPNStatusConnected) {

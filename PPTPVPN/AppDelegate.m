@@ -76,15 +76,12 @@ static NSString *const VPNHelperToolLabel = @"com.cxy.PPTPVPN.HelpTool";
 }
 
 - (IBAction)onConnectSwitch:(ITSwitch*)sender {
-    if ([VPNManager shared].host.length == 0) {
-        sender.checked = NO;
-        [self onConfigServer: nil];
-        return;
-    }
-    
+       
     if ([VPNManager shared].status == VPNStatusDisConnect) {
         [[VPNManager shared] connect:^(NSError *err) {
-            
+            if (err.code == -2) {
+                [self onConfigServer: nil];
+            }
         }];
     } else {
         [[VPNManager shared] disConnect:^(NSError *err) {
